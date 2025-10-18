@@ -11,86 +11,99 @@
     <!--Insert header here-->
     <div id="header"></div>
 
+    <!--Section for FAQ-->
     <main class="section"> 
-        <!--What is ParetnPal?-->
         <div class="faq-item">
             <button class="faq-question" aria-expanded="false" aria-controls="faq1">
                 What is ParentPal?
+                <img src="/src/colored-arrow.png" class="arrow">
             </button>
             <div id="faq1" class="faq-answer" hidden>
-                <p>
-                    Parent Pal is a rewards-based event platform for families with children aged 12 and under. 
-                    It helps families discover child-friendly events, while earning points for booking, attending, and reviewing events, which can then be redeemed for event discounts.
-                </p>
-                <img src="/src/father-and-daughter.jpg" alt="Father and daughter bond" class="picture">
+                <div class="faq-content">
+                    <div class="faq-text">
+                        <p>
+                            ParentPal is your go-to platform for discovering exciting and family-friendly events tailored to children of all ages.
+                            Designed with busy parents in mind, ParentPal makes it easy to explore what’s happening in your local area with just a few clicks. Whether you’re searching for music classes, sports activities, educational workshops, or fun weekend outings, the platform helps you find events that match your child’s interests and your family’s schedule.
+                            One of ParentPal’s standout features is its smart filtering system, allowing you to customise your search by age group, location, event type, or time of day. 
+                            You can also save your preferences, ensuring that relevant events appear first every time you log in. 
+                            As you engage with the platform, you’ll even have the chance to collect rewards that can be used toward future events—helping families not only plan better but also save along the way.
+                        </p>
+                    </div>
+                    <div class="faq-image">
+                        <img src="/src/father-and-daughter.jpg" alt="Father and daughter bond" class="picture">
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!--How to earn point rewards?-->
         <div class="faq-item">
             <button class="faq-question" aria-expanded="false" aria-controls="faq2">
                 How to earn point rewards?
+                <img src="/src/colored-arrow.png" class="arrow">
             </button>
             <div id="faq2" class="faq-answer" hidden>
                 <div class="rewards-row">
                     <div class="reward-step">
         `               <img src="/src/sign-up.png" alt="Sign up icon" class="step-icon">
                         <h4>Sign Up</h4>
-                        <p>Get bonus points instantly, plus extra when you refer friends.</p>
+                        <p>Get bonus points instantly, plus extra when you refer friends. First time signed up would give you <b>15 points</b> rewards!</p>
                     </div>
 
                     <div class="reward-step">
                         <img src="/src/book.png" alt="Book icon" class="step-icon">
                         <h4>Book</h4>
-                        <p>Earn points every time you book an event.</p>
+                        <p>Earn points every time you book an event. Each event that's booked will give you <b>1 point</b> or more. You can use the collected points as discounts for paid events!</p>
                     </div>
 
                     <div class="reward-step">
                         <img src="/src/scan.png" alt="Scan icon" class="step-icon">
                         <h4>Scan</h4>
-                        <p>Scan your card at events to collect points automatically.</p>
+                        <p>Scan your card at events to collect points automatically. So, just by showing up to the events you are interested in joining, can give you more points!</p>
                     </div>
 
                     <div class="reward-step">
-                        <img src="/src/review.png" alt="Review icon" class="step-icon">
-                        <h4>Leave a Review</h4>
-                        <p>Share your thoughts to earn points. Upvote or downvote other reviews to score even more.</p>
+                        <video src="#" alt="How to claim points video" class="video"></video>
+                        <p>Visual guide on how to earn your rewards!</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!--How do I redeem my rewards points-->
         <div class="faq-item">
             <button class="faq-question" aria-expanded="false" aria-controls="faq3">
-                How do I redeem my rewards points?
+                Can events be booked on ParentPal?
+                <img src="/src/colored-arrow.png" class="arrow">
             </button>
             <div id="faq3" class="faq-answer" hidden>
+                <video src="#" alt="How to book the event" class="video"></video>
+                <p>Events are not booked on the ParentPal website. You can only browse available events on this website and you will be redirected to the official events' account and booked from there. Once you have booked the events you are interested with, you will receive a point from ParentPal!</p>
             </div>
         </div>
 
-        <!--Can I create ParentPal accounts for my kids?-->
         <div class="faq-item">
             <button class="faq-question" aria-expanded="false" aria-controls="faq4">
-                Can I create ParentPal accounts for my kids?
+                How do I save my filters?
+                <img src="/src/colored-arrow.png" class="arrow">
             </button>
             <div id="faq4" class="faq-answer" hidden>
-                <p>There are multiple ways you can earn point rewards from ParentPal:</p>
+                <p>You can save your filters by answering the quiz (when you signing in) and click on the save preferences button. All your preferences such as <b>age allocated for the events</b>, <b>cost of the events</b>, <b>activity type</b>, and <b>prefered suburb</b> will be saved, and you can apply your preferences anytime you are signed in. Only the date range will not be saved.</p>
             </div>
         </div>
 
-        <!--Can I delete my account?-->
         <div class="faq-item">
             <button class="faq-question" aria-expanded="false" aria-controls="faq5">
-                Can I delete my account?
+                How to checked favourite and booked events?
+                <img src="/src/colored-arrow.png" class="arrow">
             </button>
             <div id="faq5" class="faq-answer" hidden>
-                <p>Yes, you can go to settings and select "Delete Account". You will be asked to confirm your decision.</p>
+                <video src="#" alt="How to checked saved events" class="video"></video>
+                <p>You can clicked on the profile page and hover on the <a href="/html/profile_my_events.html"><b>My Events</b></a> page and see your booked events and favourite events you saved, tailored with the nearest date to the latest date!</p>
             </div>
         </div>
     </main>
 
 <!--Header & Footer JS-->
+    <div id="footer"></div>
     <script src="/js/header_footer.js"></script>
     <!--Guide JS-->
     <script src="/js/guide.js"></script>

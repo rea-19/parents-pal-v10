@@ -5,21 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resources</title>
     <link rel="stylesheet" href="/css/main.css">
-    <!--leaflet library-->
+    <!--Leaflet library-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
-    <!--Insert header here-->
+    <!--Header-->
     <div id="header"></div>
 
+    <!--Map settings-->
     <main class="layout">
         <div id="map-container">
             <div id="map"></div>
         </div>
-
+        
+        <!--Buttons for filters-->
         <div id="controls">
-            <input type="text" id="suburbInput" placeholder="Enter your suburb...">
+            <input type="text" id="suburbInput" placeholder="Enter Your Suburb...">
             <div id="categoryButtons">
                 <button class="filter-button" data-type="events">
                     <img src="/src/events-green.png" alt="Events icon">
@@ -39,20 +41,11 @@
                 </button>
             </div>
         </div>
-
-        <div id="eventDetailsPanel" class="details-panel hidden">
-            <h2 id="eventTitle">Event Name</h2>
-            <div class="event-meta">
-                <span id="eventCategory">Category</span>
-                <span id="eventAge">Age</span>
-                <span id="eventDate">Date</span>
-            </div>
-            <p id="eventDescription">Event description or location...</p>
-            <button id="moreDetailsBtn">More Details</button>
-        </div>
     </main>
 
+
     <!--Header & Footer JS-->
+    <div id="footer"></div>
     <script src="/js/header_footer.js"></script>
     <!--Leaflet JS-->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
