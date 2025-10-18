@@ -1,9 +1,11 @@
+//Map initialization
 const map = L.map("map").setView([-27.5, 153.0], 10);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: 'Map data © OpenStreetMap',
   maxZoom: 18
 }).addTo(map);
 
+//Store categorized markers for filters
 const allMarkers = {
   events: [],
   markets: [],
@@ -11,17 +13,20 @@ const allMarkers = {
   toilet: []
 };
 
+//Put icon definitions as constant
 const iconEvents = L.icon({ iconUrl: "/src/events-black.png", iconSize: [32, 32], iconAnchor: [16, 32] });
 const iconMarkets = L.icon({ iconUrl: "/src/markets-black.png", iconSize: [32, 32], iconAnchor: [16, 32] });
 const iconParks = L.icon({ iconUrl: "/src/park-black.png", iconSize: [32, 32], iconAnchor: [16, 32] });
 const iconToilet = L.icon({ iconUrl: "/src/toilet-black.png", iconSize: [32, 32], iconAnchor: [16, 32] });
 
+//Library Nominatim - convert textual adress to lat and long
 function geocodeAddress(address) {
   return fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
     .then(res => res.json())
     .then(results => results.length ? { lat: parseFloat(results[0].lat), lon: parseFloat(results[0].lon) } : null);
 }
 
+//zoomed in the map if name is mentioned
 function focusOnSuburb(suburbName) {
   if (!suburbName) return;
   fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(suburbName + ", Brisbane, Australia")}`)
@@ -33,6 +38,7 @@ function focusOnSuburb(suburbName) {
     });
 }
 
+//Pop up on map for Events button
 function processEventRecords(records) {
   const geocodePromises = records.map(record => {
     const name = record.subject || record.subject || "Event";
@@ -80,6 +86,7 @@ Promise.all([
 })
 .then(() => console.log("All event markers loaded."));
 
+//Pop up on map for Markets button
 function processMarkets(records) {
   const geocodePromises = records.map(record => {
     const name = record.subject || "Unnamed Market";
@@ -124,9 +131,10 @@ fetch("https://data.brisbane.qld.gov.au/api/explore/v2.1/catalog/datasets/market
   .then(() => console.log("Market markers loaded."))
   .catch(err => console.error("Error loading markets dataset:", err));
 
+  //Pop up on map for Parks button
 function processParks(records) {
   records.forEach(record => {
-    const coords = record.geo_point_2d;
+    const coords = record.geo_point_2d; //because in the API, there is no textual code
     if (!coords || !Array.isArray(coords) || coords.length !== 2) return;
 
     const lat = coords[0];
@@ -171,6 +179,7 @@ fetch("https://data.brisbane.qld.gov.au/api/explore/v2.1/catalog/datasets/park-l
 
   allMarkers.parks.forEach(marker => marker.addTo(map));
 
+  //Pop up on map for Toilets button
 function processToilets(records) {
   records.forEach(record => {
     const lat = record.latitude;
@@ -216,6 +225,7 @@ fetch("https://data.brisbane.qld.gov.au/api/explore/v2.1/catalog/datasets/public
   .then(data => processToilets(data.results))
   .catch(err => console.error("Error loading toilets dataset:", err));
 
+  //Filter button logic 
 document.querySelectorAll(".filter-button").forEach(button => {
   button.addEventListener("click", () => {
     const category = button.dataset.type;
@@ -231,6 +241,8 @@ document.querySelectorAll(".filter-button").forEach(button => {
 
     allMarkers[category].forEach(marker => {
       const markerSuburb = marker.suburb || "";
+
+      //to allow flexible matching suburb names regardless of the hyphens 
       if (
         suburbInput === "" ||
         markerSuburb.includes(suburbInput) ||
