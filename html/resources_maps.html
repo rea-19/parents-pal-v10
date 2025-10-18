@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <!--leaflet CSS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <!--Insert header here-->
+    <div id="header"></div>
+
+    <main class="layout">
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+
+        <div id="controls">
+            <input type="text" id="suburbInput" placeholder="Enter your suburb...">
+            <div id="categoryButtons">
+                <button class="filter-button" data-type="events">
+                    <img src="/src/events.png" alt="Events icon">
+                    <span>Events</span>
+                </button>
+                <button class="filter-button" data-type="markets">
+                    <img src="/src/markets.png" alt="Markets icon">
+                    <span>Markets</span>
+                    </button>
+                <button class="filter-button" data-type="parks">
+                    <img src="/src/parks.png" alt="Parks icon">
+                    <span>Parks</span>
+                </button>
+                <button class="filter-button" data-type="toilet">
+                    <img src="/src/toilets.png" alt="Toilet icon">
+                    <span>Toilet</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="eventDetailsPanel" class="details-panel hidden">
+            <h2 id="eventTitle">Event Name</h2>
+            <div class="event-meta">
+                <span id="eventCategory">Category</span>
+                <span id="eventAge">Age</span>
+                <span id="eventDate">Date</span>
+            </div>
+            <p id="eventDescription">Event description or location...</p>
+            <button id="moreDetailsBtn">More Details</button>
+        </div>
+    </main>
+
+    <!--Header & Footer JS-->
+    <script src="/js/header_footer.js"></script>
+    <!--Leaflet JS-->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="/js/map.js"></script>
+    <script src="/js/tutorial_popup.js"></script>
+</body>
+</html>

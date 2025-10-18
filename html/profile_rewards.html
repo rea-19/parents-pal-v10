@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <!-- The header is fetched -->
+    <div id="header"></div>
+
+
+    <!--<h1>Profile</h1>
+    <img src="/src/rewardscard.png"> -->
+
+
+
+    <!-- Membership Card Section -->
+    
+  <section class="card-section">
+   <div class="membership-card" id="membershipCard">
+     <div class="card-inner">
+       <div class="card-face card-front">
+          <img src="/src/rewards_card.png" alt="Membership Card Front">
+       </div>
+       <div class="card-face card-back">
+          <img src="/src/rewards_card2.png" alt="Membership Card Back">
+       </div>
+     </div>
+
+     <div class="card-buttons">
+       <button class="wallet-btn">Add to Apple Wallet</button>
+       <button class="flip-btn" onclick="flipCard()">Flip Card</button>
+     </div>
+   </div>
+  </section>
+
+
+
+  <!-- Info Banner -->
+  <section class="info-banner">
+    <p>The more points you earn, the bigger the savings. Redeem whenever you’re ready, up to 30% off!</p>
+  </section>
+
+  <!-- Rewards Section -->
+   <!-- link goals to progress bar -->
+  <section class="rewards">
+    <h2>Rewards</h2>
+    <div class="rewards-grid">
+      <div class="reward-card">
+        <p>5% OFF</p>
+        <button class="goal-btn">Current Goal</button>
+      </div>
+      <div class="reward-card">
+        <p>10% OFF</p>
+        <button class="goal-btn">Set as Goal</button>
+      </div>
+      <div class="reward-card">
+        <p>15% OFF</p>
+        <button class="goal-btn">Set as Goal</button>
+      </div>
+      <div class="reward-card">
+        <p>20% OFF</p>
+        <button class="goal-btn">Set as Goal</button>
+      </div>
+      <div class="reward-card">
+        <p>25% OFF</p>
+        <button class="goal-btn">Set as Goal</button>
+      </div>
+      <div class="reward-card">
+        <p>30% OFF</p>
+        <button class="goal-btn">Set as Goal</button>
+      </div>
+    </div>
+  </section>
+
+
+  <button onclick="addPoints(10)">+10 Points</button>
+  <button onclick="setGoal(200)">Set Goal to 200</button>
+  <button onclick="resetPoints()">Reset</button>
+
+
+
+
+    <div id="footer"></div>
+
+    <!-- Javascript -->
+    <script src="/js/header_footer.js"></script>
+    <script src="/js/rewards_logic.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	  <script src="/js/tutorial_popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Events</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        /* Specific layout for My Events page */
+        #my-events-page {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        flex-wrap: wrap;
+        }
+
+        .events-container {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        flex: 1;
+        min-width: 300px;
+        max-height: 70vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .events-container h2 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+        }
+
+        .event-card {
+        background-color: rgba(255,255,255,0.95);
+        border: 1px solid #eee;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        }
+
+        .event-card button {
+        padding: 6px 12px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #fff;
+        background-color: var(--accent-green);
+        transition: background-color 0.2s;
+        }
+
+        .event-card button:hover {
+        background-color: #43a047;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div id="header"></div>
+    
+    <h1 style="text-align:center; margin-top:20px;">My Events</h1>
+
+    <div id="my-events-page">
+        <!-- Booked Events -->
+        <div class="events-container" id="booked-events">
+        <h2>Booked Events</h2>
+        <!-- Booked events will be appended here dynamically -->
+        </div>
+
+        <!-- Favourites -->
+        <div class="events-container" id="favourite-events">
+        <h2>Favourites</h2>
+        <!-- Favourite events will be appended here dynamically -->
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="/js/header_footer.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/js/profile_my_events.js"></script>
+    <script src="/js/points.js"></script>
+    <script src="/js/tutorial_popup.js"></script>
+</body>
+</html>

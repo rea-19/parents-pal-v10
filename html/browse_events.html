@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Events</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+</head>
+<body>
+    <!-- The header is fetched -->
+    <div id="header"></div>
+    
+    <div id="filter-container">
+        <p>Filter By:</p>
+        <div id="filters">
+            <div class="filter-box">
+                <label for="age">Age</label>
+                <select id="age" multiple size="4">
+                    <option value="0-1">0–1</option>
+                    <option value="1-3">1–3</option>
+                    <option value="4-6">4–6</option>
+                    <option value="7-9">7–9</option>
+                    <option value="9-12">9–12</option>
+                </select>
+            </div>
+
+            <div class="filter-box">
+                <label for="cost-slider">Cost</label>
+                <input type="text" id="cost-slider" name="cost-slider" value="" />
+            </div>
+
+            <div class="filter-box" id="activity-filter">
+                <label>Activity Type</label>
+                <div class="checkbox-dropdown">
+                    <label><input type="checkbox" name="activity" value="Art"><span>Art</span></label>
+                    <label><input type="checkbox" name="activity" value="Creative"><span>Creative</span></label>
+                    <label><input type="checkbox" name="activity" value="Culture"><span>Culture</span></label>
+                    <label><input type="checkbox" name="activity" value="Exhibitions"><span>Exhibitions</span></label>
+                    <label><input type="checkbox" name="activity" value="Family events"><span>Family Events</span></label>
+                    <label><input type="checkbox" name="activity" value="Featured"><span>Featured</span></label>
+                    <label><input type="checkbox" name="activity" value="Festivals"><span>Festivals</span></label>
+                    <label><input type="checkbox" name="activity" value="Fitness & well-being"><span>Fitness & well-being</span></label>
+                    <label><input type="checkbox" name="activity" value="Food"><span>Food</span></label>
+                    <label><input type="checkbox" name="activity" value="Green"><span>Green</span></label>
+                    <label><input type="checkbox" name="activity" value="Markets"><span>Markets</span></label>
+                    <label><input type="checkbox" name="activity" value="Music"><span>Music</span></label>
+                    <label><input type="checkbox" name="activity" value="School holidays"><span>School Holidays</span></label>
+                    <label><input type="checkbox" name="activity" value="Tours"><span>Tours</span></label>
+                    <label><input type="checkbox" name="activity" value="Workshops"><span>Workshops</span></label>
+                </div>
+            </div>
+
+
+            <div class="filter-box">
+                <label for="suburb">Suburb</label>
+                <input type="text" id="suburb" placeholder="Type suburb...">
+            </div>
+
+            <div class="filter-box">
+                <label for="date-range">Date Range</label>
+                <input type="text" id="date-range" placeholder="Select date range">
+            </div>
+
+            <div class="filter-box" id="preference-toggle" style="display:none;">
+                <label>
+                    <input type="checkbox" id="apply-preferences-checkbox">
+                    <span>Apply Preferences</span>
+                </label>
+            </div>
+
+            <div id="save-filters-box">
+                <div id="save-filters-button">
+                    <span>Save Preferences</span>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            // Initialize Flatpickr with range mode
+            flatpickr("#date-range", {
+                mode: "range",
+                dateFormat: "Y-m-d"
+            });
+        </script>
+
+        <!-- Tags container -->
+        <div id="selected-filters"></div>
+
+    </div>
+    
+    
+
+    <!-- Get the Event Records -->
+    <section id="records"></section>
+
+    <!-- The footer is fetched -->
+    <div id="footer"></div>
+
+
+    <!-- Javascript -->
+    <script src="/js/header_footer.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Ion.rangeSlider library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>   
+
+	<script src="/js/get_events.js"></script>
+    <script src="/js/cost_slider.js"></script>
+    <script src="/js/filter_logic.js"></script>
+    <script src="/js/tutorial_popup.js"></script>
+
+    <!-- Flatpickr Library -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    
+</body>
+</html>

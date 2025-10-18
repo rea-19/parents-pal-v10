@@ -1,0 +1,40 @@
+<nav id="navbar">
+    <div id="navbar-logo">
+        <img src="/src/logo.png" alt="Logo">
+    </div>
+
+    <div id="navbar-links">
+        <a href="/index.html">Home</a>
+        <a href="/html/browse_events.html">Browse Events</a>
+        <div class="dropdown">
+            <a href="#" class="dropdown-toggle">Resources ▾</a>
+            <div class="dropdown-menu">
+                <a href="/html/resources_maps.html">Map</a>
+                <a href="/html/resources_guide.html">Guide</a>
+            </div>
+        </div>
+
+        <a href="/html/profile_rewards.html">Profile</a>
+    </div>
+</nav>
+
+
+<!-- NOT SIGNED IN BAR -->
+<div class="progress-container" id="not-signedin-progressbar">
+    <div id="progress-bar">
+        <div id="progress-fill"></div>
+        <span id="point-text">Sign in to redeem discounts</span>
+        <div id="runner">🏃‍➡️</div>
+    </div>
+</div>
+
+<!-- SIGNED IN BAR -->
+<div class="progress-container" id="signedin-progressbar">
+    <div id="progress-bar">
+        <div id="progress-fill" class="progress-done"></div>
+        <span id="point-text"></span>
+        <div id="runner">🏃‍➡️</div>
+    </div>
+</div>
+
+<script src="/js/rewards_logic.js"></script>
