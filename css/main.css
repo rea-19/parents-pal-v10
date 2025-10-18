@@ -1488,3 +1488,70 @@ body {
         width: 80%;
     }
 }
+
+
+
+/*.our-story {
+  position: relative;
+  text-align: center;
+  color: white;
+  padding: 3rem 1rem;
+  z-index: 2;
+}
+
+.our-story h2 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.our-story p {
+  font-weight: bold;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+  
+
+CHATGPT USED - ADJUST THIS*/
+
+
+ 
+/* Wraps slideshow and text together */
+.slideshow-with-text {
+  position: relative;  /* lets us absolutely position children */
+  width: 100%;
+  overflow: hidden;
+}
+
+/* The text section over the slideshow */
+.our-story {
+  position: absolute;
+  top: 50%;               /* centers vertically */
+  left: 50%;              /* centers horizontally */
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  z-index: 2;             /* ensures it's above slideshow */
+  padding: 2rem;
+  width: 80%;
+}
+
+/* Heading styling */
+.our-story h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+
+}
+
+/* Paragraph styling */
+.our-story p {
+  font-size: 1.2rem;
+  line-height: 1;
+  margin: 0 auto;
+  max-width: 70%;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+
+}
