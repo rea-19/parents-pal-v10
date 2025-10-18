@@ -873,12 +873,12 @@ body {
     height: 100vh;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding: 1rem;
-    background-color: #f9f9f9;
+    background-color: var(--background-color);
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px var(--text-color);
     flex-wrap: wrap;
 }
 
@@ -886,18 +886,18 @@ body {
     height: 100%;
     width: 100%;
     max-width: 1000px;
-    border: 2px solid #ccc;
+    border: 2px solid var(--background-color);
     border-radius: 8px;
 }
 
 #controls {
     position: absolute;
-    top: 1rem;
+    top: 8rem;
     right: 1rem;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color:  var(--background-color);
     padding: 1rem;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px var(--text-color);
     z-index: 1000;
     width: 250px;
 }
@@ -913,9 +913,9 @@ body {
     align-items: center;
     gap: 0.5rem;
     padding: 0.6rem 1rem;
-    border: 2px solid var(--primary-color);
-    background-color: white;
-    color: var(--primary-color);
+    border: 2px solid var(--accent-green);
+    background-color: var(--background-color);
+    color: var(--accent-green);
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
@@ -923,7 +923,7 @@ body {
 }
 
 .filter-button.active {
-    background-color: var(--primary-color);
+    background-color: var(--accent-green);
     color: var(--text-light);
 }
 
@@ -953,10 +953,10 @@ body {
 
 .popup-card {
     font-family: 'Inter', sans-serif;
-    background-color: white;
+    background-color: var(--background-color);
     border-radius: 10px;
     padding: 1rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 12px var(--text-color);
     width: 260px;
 }
 
@@ -969,7 +969,7 @@ body {
 }
 
 .popup-price {
-    color: #4CAF50;
+    color: var(--accent-green);
 }
 
 .popup-meta div {
@@ -979,20 +979,20 @@ body {
 
 .popup-location {
     font-size: 0.85rem;
-    color: #555;
+    color: var(--muted-text);
     margin-top: 0.5rem;
 }
 
 .popup-description {
     font-size: 0.85rem;
     margin-top: 0.5rem;
-    color: #333;
+    color: var(--muted-text);
 }
 
 .popup-button {
     margin-top: 0.75rem;
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--accent-green);
+    color: var(--text-light);
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 6px;

@@ -11,10 +11,10 @@ const allMarkers = {
   toilet: []
 };
 
-const iconEvents = L.icon({ iconUrl: "/src/events.png", iconSize: [32, 32], iconAnchor: [16, 32] });
-const iconMarkets = L.icon({ iconUrl: "/src/markets.png", iconSize: [32, 32], iconAnchor: [16, 32] });
-const iconParks = L.icon({ iconUrl: "/src/parks.png", iconSize: [32, 32], iconAnchor: [16, 32] });
-const iconToilet = L.icon({ iconUrl: "/src/toilets.png", iconSize: [32, 32], iconAnchor: [16, 32] });
+const iconEvents = L.icon({ iconUrl: "/src/events-black.png", iconSize: [32, 32], iconAnchor: [16, 32] });
+const iconMarkets = L.icon({ iconUrl: "/src/markets-black.png", iconSize: [32, 32], iconAnchor: [16, 32] });
+const iconParks = L.icon({ iconUrl: "/src/park-black.png", iconSize: [32, 32], iconAnchor: [16, 32] });
+const iconToilet = L.icon({ iconUrl: "/src/toilet-black.png", iconSize: [32, 32], iconAnchor: [16, 32] });
 
 function geocodeAddress(address) {
   return fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
