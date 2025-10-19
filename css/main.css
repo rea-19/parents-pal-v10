@@ -2477,3 +2477,17 @@ CHATGPT USED - ADJUST THIS*/
 .transparent-header-container #logo .green {
     color: #8FC73B !important; 
 }
+.slide {
+  display: none;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slide img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 0;
+}
