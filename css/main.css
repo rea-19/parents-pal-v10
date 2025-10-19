@@ -775,12 +775,12 @@ body {
   margin-top: 2rem;
 }
 
-/* Individual card container */
+
 .reward-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 360px; /* roughly phone width */
+  width: 400px; 
   max-width: 100%;
 }
 
