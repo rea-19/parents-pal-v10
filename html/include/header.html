@@ -1,5 +1,3 @@
-<!-- <link rel="stylesheet" href="/css/main.css"> -->
-
 <nav id="navbar">
   <div id="navbar-logo">
     <img src="/src/logo.png" alt="Logo">
@@ -26,11 +24,18 @@
 </nav>
 
 <!-- Progress bar -->
+<style>
+  /* runner image sizing and vertical centering inside the progress bar */
+  #progress-bar { display: flex; align-items: center; gap: 8px; }
+  #progress-bar #runner { display: flex; align-items: center; }
+  .runner-img { width: 28px; height: auto; display: block; }
+</style>
+
 <div class="progress-container" id="not-signedin-progressbar">
   <div id="progress-bar">
     <div id="progress-fill"></div>
     <span id="point-text">Sign in to redeem discounts</span>
-    <div id="runner">🏃‍➡️</div>
+    <div id="runner"><img src="/src/runner.png" alt="Runner" class="runner-img"></div>
   </div>
 </div>
 
@@ -38,11 +43,9 @@
   <div id="progress-bar">
     <div id="progress-fill" class="progress-done"></div>
     <span id="point-text">You’ve earned 120 points 🎉</span>
-    <div id="runner">🏃‍➡️</div>
+    <div id="runner"><img src="/src/runner.png" alt="Runner" class="runner-img"></div>
   </div>
 </div>
-
-<script src="/js/header_footer.js"></script>
 
 <!-- POPUP SIGNUP/LOGIN -->
 <div id="popupContainer">

@@ -189,7 +189,8 @@ body {
     background-color: rgba(145, 191, 77, 0.5);
     position: relative;
     height: 22px;
-    width: 95%; 
+    width: 95%;            
+    margin: 0 auto;        
     border-radius: 10px;
     overflow: hidden;
 }
@@ -775,12 +776,12 @@ body {
   margin-top: 2rem;
 }
 
-
+/* Individual card container */
 .reward-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px; 
+  width: 360px; /* roughly phone width */
   max-width: 100%;
 }
 
@@ -1240,12 +1241,8 @@ body {
 }
 
 .video {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
+    width: 320;
+    height: 240;
 }
 
 /* Rewards Section */
@@ -1309,6 +1306,10 @@ body {
 
 /*index page - photo slideshow*/
 /*image slideshow home page*/
+.hero-content-wrapper{
+    padding-top: 2%;
+}
+
 .slider {
     position: relative;
     width: 100%;
@@ -1355,7 +1356,6 @@ body {
   align-items: center;
   z-index: 99999;
   backdrop-filter: blur(5px);
-  animation: fadeInBg 0.3s ease forwards;
 }
 
 /*  POPUP CARD */
@@ -1553,7 +1553,6 @@ body {
     margin-right: 10px;
     font-size: 24px; /* Ensure FA icons match the size of the new images */
     width: 24px;     /* Give it a fixed width for alignment */
-    text-align: center;
 }
 /* Event image and title */
 .event-image-header {
