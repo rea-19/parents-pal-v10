@@ -109,11 +109,18 @@ $(document).ready(function () {
         // ---------------------------
         $("#book-now-btn").click(() => {
           const booked = JSON.parse(localStorage.getItem("bookedEvents") || "[]");
-          if (!booked.some(e => e.subject === record.subject && e.start_datetime === record.start_datetime)) {
+          const alreadyBooked = booked.some(e => e.subject === record.subject && e.start_datetime === record.start_datetime);
+          if (!alreadyBooked) {
             booked.push(record);
             localStorage.setItem("bookedEvents", JSON.stringify(booked));
+
+            // ✅ Add 1 point for booking
+            window.addPoints(1);
+
+            alert("Saved in your Booked Events. You earned 1 point for booking!");
+          } else {
+            alert("This event is already in your Booked Events.");
           }
-          alert("Saved in your Booked Events.");
         });
 
         $("#save-event-btn").click(() => {
