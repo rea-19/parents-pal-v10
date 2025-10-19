@@ -4,24 +4,39 @@ function getQueryParam(name) {
 
 // Helper function to generate filter match items with icons and correct labels
 function generateFilterMatchItem(iconClass, value, defaultLabel) {
+    // Check if the iconClass is a file path (simple check for image extensions)
+    const isCustomImage = iconClass.endsWith('.png') || iconClass.endsWith('.jpg') || iconClass.endsWith('.svg');
+
     // Use the actual value if available, otherwise use a placeholder text based on the default
     const displayValue = value || defaultLabel;
     
     // Quick and dirty way to get the short date for the pill from the full datetime string
     let pillText = displayValue;
-    if (iconClass === 'fa-calendar-day' && displayValue) {
+    if (iconClass.includes('calendar') && displayValue) {
         // Assuming formatteddatetime is something like "Thursday, 13 October 2025, 9:00 AM"
-        // We'll just show the date part from the image: "13 October"
         const dateMatch = displayValue.match(/, (\d+ \w+)/);
         pillText = dateMatch ? dateMatch[1] : displayValue;
     }
     
     // Custom logic to match the image's pill content
-    if (iconClass === 'fa-sack-dollar') pillText = pillText.replace('N/A', 'Free');
+    if (iconClass.includes('cost')) pillText = pillText.replace('N/A', 'Free');
+
+    // ----------------------------------------------------
+    // *** CORE CHANGE IS HERE ***
+    // ----------------------------------------------------
+    let iconHtml;
+
+    if (isCustomImage) {
+        // Renders an IMG tag for custom files
+        iconHtml = `<img src="${iconClass}" class="custom-filter-icon" alt="Filter Icon">`;
+    } else {
+        // Renders the standard I tag for Font Awesome classes (fa-...)
+        iconHtml = `<i class="fa-solid ${iconClass}"></i>`;
+    }
 
     return `
         <div class="filter-match-item">
-            <i class="fa-solid ${iconClass}"></i>
+            ${iconHtml}
             <span>${pillText}</span>
         </div>
     `;
@@ -68,47 +83,50 @@ $(document).ready(function() {
                 // using the div with class "reviews", so the dynamic review box 
                 // that was previously hardcoded is now removed as requested.
 
-                $("#event-details").html(`
-                    <div class="page-content-wrapper">
-                        <div class="event-details-container">
-                            <div class="main-event-content">
-                                <div class="event-image-header" style="background-image: url('${record.eventimage || "https://source.unsplash.com/featured/?event,library"}');">
-                                    <div class="header-overlay">
-                                        <h2 class="event-heading">${record.subject}</h2>
-                                    </div>
-                                </div>
+        $("#event-details").html(`
+            <div class="page-content-wrapper">
+                
+                <div class="event-image-header" style="background-image: url('${record.eventimage || "https://source.unsplash.com/featured/?event,library"}');">
+                    <div class="header-overlay">
+                        <h2 class="event-heading">${record.subject}</h2>
+                    </div>
+                </div>
 
-                                <div class="about-event-box">
-                                    <h3 class="about-the-event-title">About the event</h3>
-                                    <p class="event-description">${record.description || "No description for this event."}</p>
-                                </div>
-                                
-                                <div class="event-actions-bar">
-                                    <button class="action-button primary" id="book-now-btn">
-                                        <i class="fa-solid fa-book-open"></i> Book Now 
-                                    </button>
-                                    <button class="action-button secondary" id="save-event-btn">
-                                        <i class="fa-solid fa-bookmark"></i> Save Event 
-                                    </button>
-                                    <button class="action-button tertiary" id="copy-address-btn">
-                                        <i class="fa-solid fa-copy"></i> Copy Address 
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="filter-matches-panel">
-                                <h4>Filter matches</h4>
-                                <div class="filter-match-list">
-                                    ${generateFilterMatchItem('fa-location-dot', record.location, 'Chermside Library')}
-                                    ${generateFilterMatchItem('fa-palette', record.primaryeventtype, 'Creative')}
-                                    ${generateFilterMatchItem('fa-calendar-day', record.formatteddatetime, '13 October')}
-                                    ${generateFilterMatchItem('fa-child', record.age, '3 - 5 years')}
-                                    ${generateFilterMatchItem('fa-sack-dollar', record.cost, 'Free')}
-                                </div>
-                            </div>
+                <div class="content-row-container">
+                    
+                    <div class="main-event-content">
+                        <div class="about-event-box">
+                            <h3 class="about-the-event-title">About the event</h3>
+                            <p class="event-description">${record.description || "No description for this event."}</p>
+                        </div>
+                        
+                        <div class="event-actions-bar">
+                            <button class="action-button primary" id="book-now-btn">
+                                <i class="fa-solid fa-book-open"></i> Book Now 
+                            </button>
+                            <button class="action-button secondary" id="save-event-btn">
+                                <i class="fa-solid fa-bookmark"></i> Save Event 
+                            </button>
+                            <button class="action-button tertiary" id="copy-address-btn">
+                                <i class="fa-solid fa-copy"></i> Copy Address 
+                            </button>
                         </div>
                     </div>
-                `);
+
+                    <div class="filter-matches-panel">
+                        <h4>Filter matches</h4>
+                        <div class="filter-match-list">
+                            ${generateFilterMatchItem('/src/location.png', record.location, 'Chermside Library')}
+                            ${generateFilterMatchItem('/src/activity.png', record.primaryeventtype, 'Creative')}
+                            ${generateFilterMatchItem('/src/calendar.png', record.formatteddatetime, '13 October')}
+                            ${generateFilterMatchItem('/src/age.png', record.age, '3 - 5 years')}
+                            ${generateFilterMatchItem('/src/cost.png', record.cost, 'Free')}
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        `);
 
                 // ------------------ BUTTON FUNCTIONALITY ------------------
 
