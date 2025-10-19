@@ -154,8 +154,8 @@ Promise.all([
 }).catch(err => console.error("Events fetch error:", err));
 
 // Markets (local JSON file)
-// fetch("brisbane-city-council-events-locations.json")
-fetch("https://data.brisbane.qld.gov.au/api/explore/v2.1/catalog/datasets/markets-events/records?limit=100").then(res => res.json())
+fetch("brisbane-city-council-events-locations.json")
+  .then(res => res.json())
   .then(data => processMarkets(data))
   .catch(err => console.error("Markets fetch error:", err));
 

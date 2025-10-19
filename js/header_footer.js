@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadHeader();
 });
 
-// --- Load Header ---
+
 function loadHeader() {
   fetch("/html/include/header.html")
     .then(res => res.text())
@@ -13,7 +13,6 @@ function loadHeader() {
     .catch(err => console.error("Error loading header:", err));
 }
 
-// --- Initialize Header ---
 function initHeader() {
   const loggedIn = localStorage.getItem("loggedIn") === "true";
   const navbarLinks = document.getElementById("navbar-links");
@@ -65,7 +64,7 @@ function initHeader() {
     }
 
   } else {
-    // Logged out: show normal profile button
+    // Logged out show normal profile button
     if (profileBtn) {
       profileBtn.style.display = "inline-block";
       profileBtn.href = "#";
@@ -89,9 +88,6 @@ function initHeader() {
   updateProgressBar();
 }
 
-
-
-// --- Update Progress Bar ---
 function updateProgressBar() {
   const loggedIn = localStorage.getItem("loggedIn") === "true";
   const notSignedInBar = document.getElementById("not-signedin-progressbar");
@@ -127,7 +123,7 @@ function updateProgressBar() {
   }
 }
 
-// --- Popup Logic (for logged-out users) ---
+// Popup logic for logged-out users
 function initPopup() {
   const popup = document.getElementById('popupContainer');
   const loginForm = document.getElementById('loginForm');

@@ -1,4 +1,3 @@
-// js/homepage.js
 
 let slideImages = []; // Array to hold the 7 dynamically loaded image URLs
 let slideIndex = 0;
@@ -100,7 +99,7 @@ window.previousSlide = function() {
 }
 
 
-// --- Auto Slideshow Logic ---
+//Auto Slideshow Logic
 let slideshowInterval;
 const SLIDE_DURATION = 5000; // 5 seconds
 
@@ -121,7 +120,6 @@ function resetAutoSlideshow() {
 $(document).ready(function() {
     initializeSlideshow();
     
-    // Optional: Pause on hover
     $('.slider').hover(
         function() { // mouseenter
             clearInterval(slideshowInterval);
