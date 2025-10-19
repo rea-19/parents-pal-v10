@@ -8,38 +8,36 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-  
+
+  <!-- Header -->
   <div id="header"></div>
-  
-    <!--Map settings-->
-    <main class="layout">
-        <div id="map-container">
-            <div id="map"></div>
-        </div>
-        
-        <!--Buttons for filters-->
-        <div id="controls">
-            <input type="text" id="suburbInput" placeholder="Enter Your Suburb...">
-            <div id="categoryButtons">
-                <button class="filter-button" data-type="events">
-                    <img src="/src/events-green.png" alt="Events icon">
-                    <span>Events</span>
-                </button>
-                <button class="filter-button" data-type="markets">
-                    <img src="/src/markets-green.png" alt="Markets icon">
-                    <span>Markets</span>
-                    </button>
-                <button class="filter-button" data-type="parks">
-                    <img src="/src/park-green.png" alt="Parks icon">
-                    <span>Parks</span>
-                </button>
-                <button class="filter-button" data-type="toilet">
-                    <img src="/src/toilet-green.png" alt="Toilet icon">
-                    <span>Toilet</span>
-                </button>
-            </div>
-        </div>
-    </main>
+
+  <!-- Main Layout -->
+  <main class="layout">
+    <div id="map-container">
+      <div id="map" style="height: 100vh;"></div>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div id="controls">
+      <button class="filter-button" data-type="events">
+        <img src="/src/events-black.png" alt="Events" />
+        <span>Events</span>
+      </button>
+      <button class="filter-button" data-type="markets">
+        <img src="/src/markets-black.png" alt="Markets" />
+        <span>Markets</span>
+      </button>
+      <button class="filter-button" data-type="parks">
+        <img src="/src/park-black.png" alt="Parks" />
+        <span>Parks</span>
+      </button>
+      <button class="filter-button" data-type="toilet">
+        <img src="/src/toilet-black.png" alt="Toilets" />
+        <span>Toilets</span>
+      </button>
+    </div>
+  </main>
 
   <!-- Footer -->
   <div id="footer"></div>
