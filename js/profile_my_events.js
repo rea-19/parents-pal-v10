@@ -10,29 +10,28 @@ $(document).ready(function() {
             <div class="event-card">
                 <div class="image-container">
                     <img src="${event.eventimage || 'https://source.unsplash.com/featured/?event,library'}" 
-                         alt="${event.subject}" 
-                         class="event-image">
+                         alt="${event.subject}" class="event-image">
                     <div class="overlay"></div>
+                    <div class="title">${event.subject}</div>
                     <div class="info">
-                        <h3>${event.subject}</h3>
                         <p><strong>Date:</strong> ${event.formatteddatetime || "N/A"}</p>
                         <p><strong>Location:</strong> ${event.location || "N/A"}</p>
+                        <div class="card-buttons">
+                            <button class="view-details-btn">View Details</button>
+                            <button class="remove-btn">Not Interested</button>
+                        </div>
                     </div>
-                </div>
-                <div class="card-buttons">
-                    <button class="view-details-btn">View Details</button>
-                    <button class="remove-btn">Not insterested anymore</button>
                 </div>
             </div>
         `);
 
-        // View Details button
+        // View Details
         card.find(".view-details-btn").click(function() {
             const url = `event_details.html?subject=${encodeURIComponent(event.subject)}&start=${encodeURIComponent(event.start_datetime)}&end=${encodeURIComponent(event.end_datetime)}`;
             window.location.href = url;
         });
 
-        // Remove button
+        // Remove / Not Interested
         card.find(".remove-btn").click(function() {
             if (confirm(`Are you sure you want to remove "${event.subject}"?`)) {
                 let storageArray = JSON.parse(localStorage.getItem(type) || "[]");
@@ -45,14 +44,12 @@ $(document).ready(function() {
         return card;
     }
 
-    // Populate booked events
     if (bookedEvents.length === 0) {
         bookedContainer.append("<p>No booked events yet.</p>");
     } else {
         bookedEvents.forEach(event => bookedContainer.append(createEventCard(event, "bookedEvents")));
     }
 
-    // Populate favourite events
     if (favouriteEvents.length === 0) {
         favouriteContainer.append("<p>No favourite events yet.</p>");
     } else {
