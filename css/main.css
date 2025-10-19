@@ -9,6 +9,18 @@
     --muted-text: #555555;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
 
 body {
     background-color: var(--background-color);
@@ -168,10 +180,9 @@ body {
     display: flex;
     justify-content: center; 
     align-items: center;
-    padding: 0 10px;
     box-sizing: border-box;
     background-color: var(--background-color);
-    padding-top: 10px;
+    padding: 10px 0px 10px;
 }
 
 #progress-bar {
@@ -181,6 +192,17 @@ body {
     width: 95%; 
     border-radius: 10px;
     overflow: hidden;
+}
+
+.progress-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    padding-top: 10px;
 }
 
 #progress-bar:hover {
@@ -1218,8 +1240,12 @@ body {
 }
 
 .video {
-    width: 320;
-    height: 240;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
 }
 
 /* Rewards Section */
