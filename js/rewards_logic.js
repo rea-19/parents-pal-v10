@@ -78,6 +78,7 @@ waitForProgressBar((progress) => {
   updateProgressBar();
 });
 
+// Reference: https://www.bing.com/videos/riverview/relatedvideo?q=how+do+i+make+an+item+flip+js&&view=riverview&mmscn=mtsc&mid=F9EDC31DB5C106C22CCFF9EDC31DB5C106C22CCF&&aps=240&FORM=VMSOVR
 // Membership card flipped
 function flipCard() {
   const card = document.getElementById("membershipCard");
