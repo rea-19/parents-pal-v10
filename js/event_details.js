@@ -49,7 +49,6 @@ $(document).ready(function () {
   Promise.all(apiURLs.map(url => fetch(url).then(res => res.json())))
     .then(datasets => {
       const allResults = datasets.flatMap(data => data.results);
-
       const record = allResults.find(r =>
         r.subject === subject &&
         r.start_datetime === start &&
@@ -108,30 +107,35 @@ $(document).ready(function () {
         // ---------------------------
         // Buttons Functionality
         // ---------------------------
-        $("#book-now-btn").click(function () {
+        $("#book-now-btn").click(() => {
           const booked = JSON.parse(localStorage.getItem("bookedEvents") || "[]");
-          const alreadySaved = booked.some(e => e.subject === record.subject && e.start_datetime === record.start_datetime);
-          if (!alreadySaved) {
+          const alreadyBooked = booked.some(e => e.subject === record.subject && e.start_datetime === record.start_datetime);
+          if (!alreadyBooked) {
             booked.push(record);
             localStorage.setItem("bookedEvents", JSON.stringify(booked));
+
+            // ✅ Add 1 point for booking
+            window.addPoints(1);
+
+            alert("Saved in your Booked Events. You earned 1 point for booking!");
+          } else {
+            alert("This event is already in your Booked Events.");
           }
-          alert("There is no booking needed for this, but we saved it in your Booked Events for reference.");
         });
 
-        $("#save-event-btn").click(function () {
+        $("#save-event-btn").click(() => {
           const favourites = JSON.parse(localStorage.getItem("favouriteEvents") || "[]");
-          const alreadySaved = favourites.some(e => e.subject === record.subject && e.start_datetime === record.start_datetime);
-          if (!alreadySaved) {
+          if (!favourites.some(e => e.subject === record.subject && e.start_datetime === record.start_datetime)) {
             favourites.push(record);
             localStorage.setItem("favouriteEvents", JSON.stringify(favourites));
           }
-          alert("We saved it in your Saved Events, in your profile.");
+          alert("Saved in your Saved Events.");
         });
 
-        $("#copy-address-btn").click(function () {
-          navigator.clipboard.writeText(record.location || "Location not available").then(() => {
-            alert("Address copied to clipboard!");
-          }).catch(err => console.error("Copy failed:", err));
+        $("#copy-address-btn").click(() => {
+          navigator.clipboard.writeText(record.location || "Location not available")
+            .then(() => alert("Address copied to clipboard!"))
+            .catch(err => console.error("Copy failed:", err));
         });
       } else {
         $("#event-details").html("<p>Event not found.</p>");
@@ -169,65 +173,16 @@ $(document).ready(function () {
     else nameField.slideUp(200);
   });
 
-  // Points system setup
-  const progress = document.querySelector(".progress-done");
-  let userPoints = parseInt(localStorage.getItem("userPoints") || "0", 10);
-  const goal = 50;
-
-  function updateProgressBar() {
-    if (!progress) return;
-    const percentage = Math.min((userPoints / goal) * 100, 100);
-    progress.style.width = `${percentage}%`;
-  //  progress.innerText = `${userPoints}/${goal}`; ----> only adds the text under the button (eg 5/50
-    localStorage.setItem("userPoints", userPoints);
-  }
-
-  function addPoints(points) {
-    userPoints += points;
-    updateProgressBar();
-  }
-
-  updateProgressBar();
-
-  // Handle review submission
+  // Handle review submission using global points system
   $("#reviewForm").submit(function (e) {
     e.preventDefault();
     const choice = reviewerChoice.val();
     const name = choice === "named" ? $("#reviewerName").val() : "Anonymous";
 
-    addPoints(5);
-    updateHeaderProgress(5);
+    // ✅ Add points using global rewards system
+    window.addPoints(5);
+
     alert(`Thank you, ${name}! You’ve earned 5 points for leaving a review.`);
     closePopup();
   });
-
-  // ==========================
-// 🔄 Update Global Progress Bar (Header Integration)
-// ==========================
-function updateHeaderProgress(pointsToAdd = 0) {
-  // Only update if user is logged in
-  const loggedIn = localStorage.getItem("loggedIn") === "true";
-  if (!loggedIn) return;
-
-  // Load existing points or start from 0
-  let userPoints = parseInt(localStorage.getItem("userPoints") || "0", 10);
-  const goal = 50;
-
-  // Add new points
-  userPoints += pointsToAdd;
-  localStorage.setItem("userPoints", userPoints);
-
-  // Find the progress bar in the header
-  const bar = document.querySelector("#signedin-progressbar .progress-done");
-  if (bar) {
-    const percentage = Math.min((userPoints / goal) * 100, 100);
-    bar.style.width = `${percentage}%`;
-    bar.innerText = `${userPoints}/${goal}`;
-  }
-
-  // (Optional) check if user reached the goal
-  if (userPoints >= goal) {
-    console.log("🎉 Goal reached! Consider triggering a reward popup here.");
-  }
-}
 });

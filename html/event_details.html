@@ -5,68 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event</title>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p6CjwB5D1l84cM5KuV1wX1Z5U1wD0g/6QxCg3WQ03NnODU4rrjT0TV4U+6Zz5f9G7D1mEeGey9d8eHtG75TQ1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <!--using-Font-Awesome-------------------->
-    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
 </head>
 <body>
-    <!-- The header is fetched -->
+    <!-- Header -->
     <div id="header"></div>
 
+    <!-- Global Progress Bar -->
+    <div id="signedin-progressbar" class="progress-container" style="margin: 20px; height: 20px;">
+        <div class="progress-done"></div>
+        <div id="runner"></div>
+    </div>
 
-    <!-- Get the Event Details -->
-    <section id="event-details">
+    <!-- Event Details -->
+    <section id="event-details"></section>
 
-        <!-- Event details will be dynamically inserted here -->
-    </section>
-    
-<!-- Write Review Button -->
-<div class="write-review-section" style="text-align: center; margin: 20px 0;">
-  <button id="writeReviewBtn" class="action-button primary">
-    <i class="fa-solid fa-pen"></i> Write Review
-  </button>
-</div>
+    <!-- Write Review Button -->
+    <div class="write-review-section" style="text-align: center; margin: 20px 0;">
+      <button id="writeReviewBtn" class="action-button primary">
+        <i class="fa-solid fa-pen"></i> Write Review
+      </button>
+    </div>
 
+    <!-- Review Popup -->
+    <div id="reviewPopup" class="popup">
+      <div class="popup-content">
+        <span class="close">&times;</span>
+        <form id="reviewForm">
+          <label for="reviewerChoice">Post as:</label>
+          <select id="reviewerChoice">
+            <option value="anonymous">Anonymous</option>
+            <option value="named">Named</option>
+          </select>
 
-<div id="reviewPopup" class="popup">
-  <div class="popup-content">
-    <span class="close">&times;</span>
-    <form id="reviewForm">
-      <label for="reviewerChoice">Post as:</label>
-      <select id="reviewerChoice">
-        <option value="anonymous">Anonymous</option>
-        <option value="named">Named</option>
-      </select>
+          <div id="nameField" style="display: none;">
+            <input type="text" id="reviewerName" placeholder="Enter your name">
+          </div>
 
-      <div id="nameField" style="display: none;">
-        <input type="text" id="reviewerName" placeholder="Enter your name">
+          <textarea id="reviewText" placeholder="Write your review..."></textarea>
+          <div class="button-group">
+            <button type="submit" class="save-btn">Submit</button>
+            <button type="button" class="cancel-btn">Cancel</button>
+          </div>
+        </form>
       </div>
-
-      <textarea id="reviewText" placeholder="Write your review..."></textarea>
-      <div class="button-group">
-        <button type="submit" class="save-btn">Submit</button>
-        <button type="button" class="cancel-btn">Cancel</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-
-
-    <div class ="reviews"> 
-        <!-- Elfsight All-in-One Reviews | Untitled All-in-One Reviews -->
-        <script src="https://elfsightcdn.com/platform.js" async></script>
-        <div class="elfsight-app-b1ed0314-7e70-428f-b9d2-e9dcf252213a" data-elfsight-app-lazy></div>    
     </div>
 
     <div id="footer"></div>
 
-    <!-- Javascript -->
+    <!-- Scripts -->
     <script src="/js/header_footer.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-	<script src="/js/event_details.js"></script>
+    <script src="/js/rewards_logic.js"></script> <!-- global points system -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/js/event_details.js"></script>
 </body>
 </html>
-
