@@ -9,6 +9,18 @@
     --muted-text: #555555;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
 
 body {
     background-color: var(--background-color);
@@ -168,10 +180,9 @@ body {
     display: flex;
     justify-content: center; 
     align-items: center;
-    padding: 0 10px;
     box-sizing: border-box;
     background-color: var(--background-color);
-    padding-top: 10px;
+    padding: 10px 0px 10px;
 }
 
 #progress-bar {
@@ -181,6 +192,17 @@ body {
     width: 95%; 
     border-radius: 10px;
     overflow: hidden;
+}
+
+.progress-container {
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    padding-top: 10px;
 }
 
 #progress-bar:hover {
@@ -232,11 +254,14 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     padding: 30px 40px;
-    margin-top: 20px;
-    background:
+    background: 
         linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)),
-        url("/src/family_event.png"); 
+        url("/src/family_event.png");
+    background-size: cover;
+    background-position: center;
+    margin-top: auto;
 }
+
 
 #footer-container li {
     list-style: none;
@@ -414,14 +439,6 @@ body {
     padding: 10px 20px 10px 20px;
 }
 
-
-#filter-row {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: nowrap;
-}
-
 #filters {
     flex: 1;
     display: flex;
@@ -435,6 +452,7 @@ body {
 }
 
 .filter-box {
+    position: relative;
     display: inline-flex;
     flex-direction: column;
     border: 2px solid rgba(40, 167, 69, 0.3);
@@ -448,12 +466,10 @@ body {
     font-size: 0.9em;
 }
 
-
 .filter-box:hover,
 .filter-box.active {
     border-color: #28a745;
 }
-
 
 .filter-box select,
 .filter-box input[type="text"],
@@ -461,52 +477,45 @@ body {
 .filter-box .checkbox-dropdown,
 .filter-box .checkbox-group {
     display: none;
-    margin-top: 5px;
-    width: 100%;
-}
-
-.filter-box:hover select,
-.filter-box:hover input[type="text"],
-.filter-box:hover .irs,
-.filter-box:hover .checkbox-dropdown,
-.filter-box:hover .checkbox-group,
-.filter-box.active select,
-.filter-box.active input[type="text"],
-.filter-box.active .irs,
-.filter-box.active .checkbox-dropdown,
-.filter-box.active .checkbox-group {
-    display: block;
 }
 
 
-.checkbox-dropdown {
+/* selected filters */
+
+#selected-filters {
+    margin-top: 8px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 6px;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: #fff;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    padding: 8px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(40,167,69,0.2);
     width: 100%;
-    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
 }
 
-.checkbox-dropdown label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    line-height: 1.4;
-    white-space: normal;
-}
-
-.checkbox-dropdown input[type="checkbox"]:checked + span {
+.filter-tag {
     background-color: #28a745;
     color: #fff;
-    border-radius: 4px;
-    padding: 1px 4px;
+    padding: 4px 8px;
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85em;
+}
+
+.filter-tag span {
+    margin-right: 6px;
+}
+
+.filter-tag button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    line-height: 1;
 }
 
 /* Save Filters Button */
@@ -535,42 +544,37 @@ body {
     border-color: #6aa53f;
 }
 
-/* selected filters */
-
-#selected-filters {
-    margin-top: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    padding-top: 5px;
-    border-top: 1px solid rgba(40,167,69,0.2);
-    width: 100%;
+/* dropdown element floating above */
+.dropdown-floating {
+    position: absolute;
+    z-index: 9999;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
-.filter-tag {
+.dropdown-floating label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    line-height: 1.4;
+    white-space: normal;
+}
+
+.dropdown-floating input[type="checkbox"]:checked + span {
     background-color: #28a745;
     color: #fff;
-    padding: 4px 8px;
-    border-radius: 16px;
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.85em;
+    border-radius: 4px;
+    padding: 1px 4px;
 }
-
-.filter-tag span {
-    margin-right: 6px;
-}
-
-.filter-tag button {
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1em;
-    line-height: 1;
-}
-
 
 /* event details */
 .checked {
@@ -1000,7 +1004,7 @@ body {
     color: #555;
 }
 
-/* MAP SECTION ON RESOURCES PAGE */
+/* MAP SECTION ON MAP PAGE */
 #map-container {
     height: 100vh;
     width: 100%;
@@ -1082,7 +1086,6 @@ body {
     gap: 0.5rem;
 }
 
-/*Show the details of the event*/
 #eventDetailsPanel {
     display: none;
 }
@@ -1144,8 +1147,7 @@ body {
     cursor: pointer;
 }
 
-/*GUIDE SECTION ON RESOURCES PAGE*/
-/*Space between each question containers*/
+/*how to section*/
 .faq-item {
     display: flex;
     justify-content: center;
@@ -1155,7 +1157,6 @@ body {
     margin-bottom: 1.5rem; 
 }
 
-/*Container of each FAQ questions*/
 .faq-question {
     display: flex;
     justify-content: space-between;
@@ -1174,7 +1175,6 @@ body {
     box-shadow: 0 2px 6px var(--text-color);
 }
 
-/*When cursor is on that particular container question*/
 .faq-question:hover {
     background-color: var(--background-color); 
     transform: translateY(-1px);
@@ -1192,7 +1192,6 @@ body {
     border: 2px solid var(--primary-color);
 }
 
-/*Icon in the question box */
 .arrow {
     justify-content: flex-end;
     width: 24px;
@@ -1240,7 +1239,6 @@ body {
   border-radius: 8px;
 }
 
-/*Video size for the answer section*/
 .video {
     width: 100%;
     max-width: 600px;

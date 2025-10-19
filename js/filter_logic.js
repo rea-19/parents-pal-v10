@@ -1,33 +1,111 @@
-$(".filter-box").click(function(e){
-    e.stopPropagation();
-    $(".filter-box").not(this).removeClass("active");
-    $(this).toggleClass("active");
+$(document).ready(function() {
 
-    const dropdown = $(this).find(".checkbox-dropdown");
-    if(dropdown.length){
-        const offset = $(this).offset();
-        dropdown.css({
-            top: offset.top + $(this).outerHeight() + 4 + "px", // slightly below
-            left: offset.left + "px",
-            width: $(this).outerWidth() + "px"
+    // Move all interactive elements into a floating dropdown, except #preference-toggle
+    $(".filter-box").not("#preference-toggle").each(function() {
+        const $box = $(this);
+
+        // Wrap all inputs/selects into a floating dropdown container
+        const $dropdown = $("<div class='dropdown-floating'></div>").appendTo("body");
+        $box.data("floatingDropdown", $dropdown);
+
+        // Move slider, selects, checkboxes, date inputs
+        $box.find(".checkbox-dropdown, select, input[type='text']").each(function() {
+            $(this).appendTo($dropdown);
         });
-    }
+
+        // Hide initially
+        $dropdown.hide();
+    });
+
+    // Hover logic for dropdowns
+    $(".filter-box").not("#preference-toggle").hover(
+        function() {
+            const $dropdown = $(this).data("floatingDropdown");
+
+            // Hide other dropdowns
+            $(".filter-box").not(this).not("#preference-toggle").each(function() {
+                $(this).removeClass("active");
+                $(this).data("floatingDropdown").hide();
+            });
+
+            $(this).addClass("active");
+
+            if ($dropdown.length) {
+                const offset = $(this).offset();
+
+                // Show dropdown first so slider can measure width
+                $dropdown.css({
+                    display: "block",
+                    top: offset.top + $(this).outerHeight() + 4 + "px",
+                    left: offset.left + "px",
+                    width: $(this).outerWidth() + "px"
+                });
+
+                // Initialise cost slider
+                const $slider = $dropdown.find("#cost-slider");
+                if ($slider.length && !$slider.data("ionRangeSlider")) {
+                    $slider.ionRangeSlider({
+                        skin: "round",
+                        type: "double",
+                        min: 0,
+                        max: 30,
+                        from: 0,
+                        to: 15,
+                        prefix: "$",
+                        grid: true,
+                        onFinish: function(data) {
+                            filterEvents();
+                        }
+                    });
+
+                    // sync with min/max input boxes
+                    setupRangeSlider("cost-range-min","cost-range-max","cost-min","cost-max");
+                } else if ($slider.length) {
+                    // Slider exists: update width in case dropdown width changed
+                    $slider.data("ionRangeSlider").update({});
+                }
+            }
+        },
+        function() {
+            const $dropdown = $(this).data("floatingDropdown");
+            setTimeout(() => {
+                if (!$dropdown.is(":hover")) {
+                    $dropdown.hide();
+                    $(this).removeClass("active");
+                }
+            }, 100);
+        }
+    );
+
+    // Keep dropdown visible on hover
+    $(document).on("mouseenter", ".dropdown-floating", function() {
+        $(this).show();
+    }).on("mouseleave", ".dropdown-floating", function() {
+        const $box = $(".filter-box").filter(function() {
+            return $(this).data("floatingDropdown")[0] === $(this).closest(".dropdown-floating")[0];
+        });
+        $(this).hide();
+        $box.removeClass("active");
+    });
+
+    // Close dropdowns when clicking outside
+    $(document).click(function(e) {
+        if (!$(e.target).closest(".filter-box, .dropdown-floating").length) {
+            $(".filter-box").removeClass("active").each(function() {
+                $(this).data("floatingDropdown").hide();
+            });
+        }
+    });
+
 });
 
-$(document).click(function(){
-    $(".filter-box").removeClass("active");
-});
 
-
-
-$("body").click(function(){
-    $(".filter-box").removeClass("active");
-});
-
+// filter tags 
 function renderSelectedFilters() {
     const container = $("#selected-filters");
     container.empty();
 
+    // age tag
     $("#age option:selected").each(function() {
         const val = $(this).val();
         const tag = $('<div class="filter-tag"><span>Age: ' + val + '</span><button>&times;</button></div>');
@@ -40,6 +118,7 @@ function renderSelectedFilters() {
         container.append(tag);
     });
 
+    // cost tag
     const costSlider = $("#cost-slider").data("ionRangeSlider");
     if(costSlider){
         const val = `$${costSlider.result.from} - $${costSlider.result.to}`;
@@ -52,6 +131,7 @@ function renderSelectedFilters() {
         container.append(tag);
     }
 
+    // activity tag
     $(".checkbox-dropdown input[type='checkbox']:checked").each(function() {
         const val = $(this).val();
         const tag = $('<div class="filter-tag"><span>Activity: ' + val + '</span><button>&times;</button></div>');
@@ -64,6 +144,7 @@ function renderSelectedFilters() {
         container.append(tag);
     });
 
+    // suburb tag
     const suburbVal = $("#suburb").val();
     if(suburbVal) {
         const tag = $('<div class="filter-tag"><span>Suburb: ' + suburbVal + '</span><button>&times;</button></div>');
@@ -75,6 +156,7 @@ function renderSelectedFilters() {
         container.append(tag);
     }
 
+    //date tag
     const dateVal = $("#date-range").val();
     if(dateVal) {
         const tag = $('<div class="filter-tag"><span>Date: ' + dateVal + '</span><button>&times;</button></div>');
@@ -87,29 +169,8 @@ function renderSelectedFilters() {
     }
 }
 
-
-$(document).ready(function(){
-    $("#age, #suburb, #cost-slider").on("change input", function(){
-        filterEvents();
-        renderSelectedFilters();
-    });
-    $(".checkbox-dropdown input[type='checkbox']").on("change", function(){
-        filterEvents();
-        renderSelectedFilters();
-    });
-    flatpickr("#date-range", {
-        mode:"range",
-        dateFormat:"Y-m-d",
-        onClose: function() {
-            filterEvents();
-            renderSelectedFilters();
-        }
-    });
-});
-
-
+// global variables and data handling
 let allFetchedRecords = [];
-
 const originalIterateRecords = window.iterateRecords;
 window.iterateRecords = function(data) {
     allFetchedRecords = allFetchedRecords.concat(data.results);
@@ -155,9 +216,9 @@ function rangesOverlap(min1, max1, min2, max2){
     return Math.max(min1, min2) <= Math.min(max1, max2);
 }
 
-
+// filtering events based on user input
 function filterEvents() {
-    if(allFetchedRecords.length === 0) return; // nothing to filter yet
+    if(allFetchedRecords.length === 0) return; 
 
     const selectedAges = $("#age").val() || [];
     const costSlider = $("#cost-slider").data("ionRangeSlider");
@@ -224,36 +285,23 @@ function filterEvents() {
     }
 }
 
-
-$(document).ready(function(){
-    $("#age, #suburb, #cost-slider").on("change input", filterEvents);
-    $(".checkbox-dropdown input[type='checkbox']").on("change", filterEvents);
-    flatpickr("#date-range", {
-        mode:"range",
-        dateFormat:"Y-m-d",
-        onClose: filterEvents
-    });
-});
-
-
-// SAVE PREFERENCES 
+// saved preferences locally stored
 function getCurrentPreferences() {
     const age = $("#age").val() || [];
     const costSlider = $("#cost-slider").data("ionRangeSlider");
     const cost = costSlider ? {from: costSlider.result.from, to: costSlider.result.to} : {from: 0, to: 200};
     const activities = $(".checkbox-dropdown input[type='checkbox']:checked").map(function(){ return $(this).val(); }).get();
     const suburb = $("#suburb").val() || "";
-    const dateRange = $("#date-range").val() || "";
 
     return {
         age,
         cost,
         activities,
-        suburb,
-        dateRange
+        suburb
     };
 }
 
+// save preference button show and hide
 function savePreferences() {
     const loggedIn = localStorage.getItem("loggedIn") === "true";
 
@@ -262,7 +310,6 @@ function savePreferences() {
         const popup = document.getElementById('popupContainer');
         const loginForm = document.getElementById('loginForm');
         const signupForm = document.getElementById('signupForm');
-
         if (popup && loginForm && signupForm) {
             popup.style.display = 'flex';
             loginForm.style.display = 'flex';
@@ -272,19 +319,22 @@ function savePreferences() {
         }
         return;
     }
-
-    // user is signed in continue as normal
+      // user is signed in
     const prefs = getCurrentPreferences();
     localStorage.setItem("savedPreferences", JSON.stringify(prefs));
     alert("Preferences saved!");
     $("#preference-toggle").show();
+
+    // apply preferences after reload
+    localStorage.setItem("applyPreferencesAfterReload", "true");
+    location.reload()
 }
 
-
+// filter events based on saved preferences
 function applySavedPreferences() {
-    const prefsStr = localStorage.getItem("savedPreferences");
-    if (!prefsStr) return;
-    const prefs = JSON.parse(prefsStr);
+    const preferenceSaved = localStorage.getItem("savedPreferences");
+    if (!preferenceSaved) return;
+    const prefs = JSON.parse(preferenceSaved);
 
     // Age
     $("#age").val(prefs.age);
@@ -306,11 +356,8 @@ function applySavedPreferences() {
     // Suburb
     $("#suburb").val(prefs.suburb);
 
-    // Date Range
-    $("#date-range").val(prefs.dateRange);
-
-    filterEvents();
-    renderSelectedFilters();
+    filterEvents(); //filter events according to user input
+    renderSelectedFilters(); //adding filter tags based on applied filters
 }
 
 function clearAllFilters() {
@@ -326,7 +373,22 @@ function clearAllFilters() {
     renderSelectedFilters();
 }
 
+
 $(document).ready(function(){
+     // Show preference options only if logged in
+    const loggedIn = localStorage.getItem("loggedIn") === "true";
+
+    if (loggedIn) {
+        // Show apply save preferences only if logged in
+        $("#preference-toggle").show(); 
+        $("#apply-preferences-container").show(); 
+    } else {
+        // Hide both when not logged in
+        $("#preference-toggle").hide();
+        $("#apply-preferences-container").hide();
+    }
+
+    // listeners for user input on events
     $("#age, #suburb, #cost-slider").on("change input", function(){
         filterEvents();
         renderSelectedFilters();
@@ -345,17 +407,20 @@ $(document).ready(function(){
     });
     $("#save-filters-button").on("click", savePreferences);
 
-    // Show preference toggle if preferences exist
-    if (localStorage.getItem("savedPreferences")) {
-        $("#preference-toggle").show();
-    }
-
     $("#apply-preferences-checkbox").on("change", function() {
-        if (this.checked) {
+        if ($(this).is(":checked")) {
+            // When toggled on, apply saved preferences
             applySavedPreferences();
         } else {
+            // When toggled off, clear all filters and filter tags
             clearAllFilters();
         }
     });
-});
 
+    // apply preferences automatically after reload if flagged
+    if (localStorage.getItem("applyPreferencesAfterReload") === "true") {
+        $("#apply-preferences-checkbox").prop("checked", true);
+        applySavedPreferences();
+        localStorage.removeItem("applyPreferencesAfterReload");
+    }
+});
