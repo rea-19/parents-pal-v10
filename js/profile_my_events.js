@@ -8,16 +8,20 @@ $(document).ready(function() {
     function createEventCard(event, type) {
         const card = $(`
             <div class="event-card">
-                <img src="${event.eventimage || 'https://source.unsplash.com/featured/?event,library'}" 
-                     alt="${event.subject}" 
-                     class="event-image">
-                <h3>${event.subject}</h3>
-                <p>${event.description || "No description available."}</p>
-                <p><strong>Date:</strong> ${event.formatteddatetime || "N/A"}</p>
-                <p><strong>Location:</strong> ${event.location || "N/A"}</p>
+                <div class="image-container">
+                    <img src="${event.eventimage || 'https://source.unsplash.com/featured/?event,library'}" 
+                         alt="${event.subject}" 
+                         class="event-image">
+                    <div class="overlay"></div>
+                    <div class="info">
+                        <h3>${event.subject}</h3>
+                        <p><strong>Date:</strong> ${event.formatteddatetime || "N/A"}</p>
+                        <p><strong>Location:</strong> ${event.location || "N/A"}</p>
+                    </div>
+                </div>
                 <div class="card-buttons">
                     <button class="view-details-btn">View Details</button>
-                    <button class="remove-btn">Remove</button>
+                    <button class="remove-btn">Not insterested anymore</button>
                 </div>
             </div>
         `);
