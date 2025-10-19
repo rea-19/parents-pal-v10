@@ -2036,122 +2036,48 @@ CHATGPT USED - ADJUST THIS*/
     padding: 2rem;
 }
 
-.card-section {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-}
 
 .membership-card {
-    background: var(--background-color);
-    border-radius: 10px;
-    padding: 1.5rem;
-    position: relative;
-    width: 350px;
-    text-align: center;
-    color: var(--text-color);
-}
-
-/* Card animation container */
-.membership-card {
-    perspective: 1000px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Expand and glow on click */
-.membership-card:active {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #7ab42e(255, 215, 0, 0.7);
-}
-
-
-/* Expand and glow only around the card image */
-.membership-card:active .card-face img {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px #7ab42e(255, 215, 0, 0.7);
+  background: var(--background-color);
+  border-radius: 10px;
+  padding: 1.5rem;
+  position: relative;
+  width: 350px;
+  text-align: center;
+  color: var(--text-color);
+  perspective: 1000px;
+  cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-.membership-card {
-    background: var(--background-color);
-    border-radius: 10px;
-    padding: 0.5rem;
-    position: relative;
-    width: 350px;
-    text-align: center;
-    color: var(--text-color);
-}
-
-/* Membership Card Interactivity */
-
-/* Card animation container */
-.membership-card {
-    perspective: 1000px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
 /* Expand and glow on click */
 .membership-card:active {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #7ab42e(255, 215, 0, 0.7);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(122, 180, 46, 0.7);
 }
 
 /* Expand and glow only around the card image */
 .membership-card:active .card-face img {
   transform: scale(1.05);
-  box-shadow: 0 0 25px #7ab42e(255, 215, 0, 0.7);
+  box-shadow: 0 0 25px rgba(122, 180, 46, 0.7);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-
-/* flipping animation */
-.flipped .card-inner {
-  transform: rotateY(180deg);
 }
 
 /* Inner rotating card */
 .card-inner {
   position: relative;
   width: 100%;
-  height: 220px; 
+  height: 220px;
   transform-style: preserve-3d;
   transition: transform 0.8s;
   border-radius: 16px;
-  overflow: visible; 
+  overflow: visible;
 }
 
-
-/* When flipped */
-.flipped .card-inner {
-    transform: rotateY(180deg);
-}
-
-
-/* flipping animation */
+/* Flipping animation */
 .flipped .card-inner {
   transform: rotateY(180deg);
 }
-
-/* Inner rotating card */
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 220px; 
-  transform-style: preserve-3d;
-  transition: transform 0.8s;
-  border-radius: 16px;
-  overflow: visible; 
-}
-
-
-/* When flipped */
-.flipped .card-inner {
-    transform: rotateY(180deg);
-}
-
 
 .card-face img {
   width: 100%;
@@ -2159,118 +2085,31 @@ CHATGPT USED - ADJUST THIS*/
   object-fit: cover;
   border-radius: 16px;
   display: block;
-}
-
-
-/* Reset glow when not pressed */
-.card-face img {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 16px;
 }
 
-
-.card-face img {
+/* Front and back faces of the card */
+.card-front,
+.card-back {
+  position: absolute;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 16px;
-  display: block;
+  backface-visibility: hidden;
+  border-radius: 10px;
 }
 
-
-/* Reset glow when not pressed */
-.card-face img {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 16px;
-}
-
-/* The actual front and back faces */
-.card-front,
-.card-back {
-    position: absolute;
-    width: 100%;
-    backface-visibility: hidden;
-    border-radius: 10px;
-}
-
-/* The actual front and back faces */
-.card-front,
-.card-back {
-    position: absolute;
-    width: 100%;
-    backface-visibility: hidden;
-    border-radius: 10px;
-}
-
-
-/* back side flipped */
+/* Back side flipped */
 .card-back {
   transform: rotateY(180deg);
 }
 
-
-.card-back {
-    transform: rotateY(180deg);
-}
-
-/* back side flipped */
-.card-back {
-  transform: rotateY(180deg);
-}
-
-.card-back {
-    transform: rotateY(180deg);
-}
-
-
-/* Buttons below card */
+/* Buttons below the card */
 .card-buttons {
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin-top: 1rem;
 }
-
-
-/* Buttons layout */
-.card-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-
-/* Buttons below card */
-.card-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-/* Buttons layout */
-.card-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.wallet-btn {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-}
-
-.wallet-btn:hover {
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-
+/* Wallet and Flip buttons */
 .wallet-btn,
 .flip-btn {
   padding: 0.5rem 1rem;
@@ -2279,57 +2118,15 @@ CHATGPT USED - ADJUST THIS*/
   cursor: pointer;
   background: var(--button-background, #7ab42e);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
+  margin-top: 1rem;
 }
 
+/* Hover effects */
 .wallet-btn:hover,
 .flip-btn:hover {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
 }
-
-
-.wallet-btn {
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-}
-
-.wallet-btn:hover {
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-
-.wallet-btn,
-.flip-btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background: var(--button-background, #7ab42e);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-}
-
-.wallet-btn:hover,
-.flip-btn:hover {
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
-}
-
-
-
-.flip-btn {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-}
-
-.flip-btn:hover {
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
 
 .info-banner details {
   background: #f9fffb;
@@ -2351,27 +2148,14 @@ CHATGPT USED - ADJUST THIS*/
   text-align: center;
 }
 
-
-.rewards {
-    text-align: center;
-    padding: 2rem;
-}
-
 .rewards {
   text-align: center;
   padding: 2rem;
 }
 
-
-.rewards {
-    text-align: center;
-    padding: 0.2rem;
-}
-
-
 .rewards h2 {
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   font-size: 2em; /* adjust as needed */
 }
 
@@ -2383,27 +2167,14 @@ CHATGPT USED - ADJUST THIS*/
   color: #8FC73B;
 }
 
-
-.rewards-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-
-
 .rewards-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 0.5rem; /* kept smaller gap for consistency */
   margin-top: 2rem;
 }
 
-
-
 /* Responsive stacking on mobile */
 @media (max-width: 480px) {
   .rewards-grid {
@@ -2416,103 +2187,36 @@ CHATGPT USED - ADJUST THIS*/
   }
 }
 
-
-
-.rewards-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-}
-
-
-/* Responsive stacking on mobile */
-@media (max-width: 480px) {
-  .rewards-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .reward-card {
-    width: 90%;
-  }
-}
-
-
-/* undividual card container */
+/* Individual card container */
 .reward-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 360px; 
+  width: 360px;
   max-width: 100%;
-}
-
-
-/* Each reward card box */
-.reward-card {
-  width: 200px;
   padding: 1.5rem;
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   background: var(--background-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Hover effect to lift slightly */
 .reward-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(143, 199, 59, 0.25); 
+  box-shadow: 0 4px 10px rgba(143, 199, 59, 0.25);
 }
 
 
-.reward-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 600px; 
-  max-width: 100%;
-}
-
-
-/* Each reward card box */
-.reward-card {
-  width: 200px;
-  padding: 1.5rem;
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background: var(--background-color);
-}
-
-/* Hover effect to lift slightly */
-.reward-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(143, 199, 59, 0.25); 
-}
-
-
+/* Reward content container */
 .reward-content {
   display: flex;
   align-items: stretch;
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   background: white;
 }
-
-
-/* Flex layout for image + side label */
-.reward-content {
-  display: flex;
-  align-items: stretch;
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-  background: white;
-}
-
 
 /* The main reward image */
 .reward-img {
@@ -2520,31 +2224,6 @@ CHATGPT USED - ADJUST THIS*/
   height: auto;
   display: block;
 }
-
-
-/* The main reward image */
-.reward-img {
-  width: 85%;
-  height: auto;
-  display: block;
-}
-
-
-/* The right column text set goal or current goal */
-.reward-side {
-  width: 15%;
-  background: #fff;
-  color: #D6A300;
-  font-weight: bold;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  text-align: center;
-  padding: 10px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 
 /* The right column text (“SET GOAL” or “CURRENT GOAL”) */
 .reward-side {
@@ -2561,7 +2240,6 @@ CHATGPT USED - ADJUST THIS*/
   justify-content: center;
 }
 
-
 /* Current goal highlight */
 .current-side {
   background: #D6A300;
@@ -2569,66 +2247,46 @@ CHATGPT USED - ADJUST THIS*/
 }
 
 
-/* Current goal highlight */
-.current-side {
-  background: #D6A300;
-  color: white;
-}
 
 
-.goal-btn {
-  background: #8FC73B;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Buttons inside the reward cards */
+/*.goal-btn {
+  background-color: #8FC73B;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Buttons inside the reward cards */
-.goal-btn {
-  background-color: #8FC73B;  
-  color: white;
-  border: none;              
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-
-.goal-btn {
-  background: #8FC73B;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.goal-btn:hover {
+/* Hover effect */
+/*.goal-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-
-
-/* Buttons inside the reward cards */
-.goal-btn {
-  background-color: #8FC73B;  
-  color: white;
-  border: none;              
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.goal-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
