@@ -2101,24 +2101,25 @@ CHATGPT USED - ADJUST THIS*/
 .card-back {
   transform: rotateY(180deg);
 }
-
 /* Buttons below the card */
 .card-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 1.25rem; /* slightly increased spacing between buttons */
+  margin-top: 0.5rem; /* reduced space above the button row */
+  margin-bottom: 0.5rem; /* reduced space below the button row */
 }
+
 /* Wallet and Flip buttons */
 .wallet-btn,
 .flip-btn {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem; /* same button size */
   border: none;
   border-radius: 8px;
   cursor: pointer;
   background: var(--button-background, #7ab42e);
+  color: #fff; /* white text */
   transition: box-shadow 0.3s ease, transform 0.2s ease;
-  margin-top: 1rem;
 }
 
 /* Hover effects */
