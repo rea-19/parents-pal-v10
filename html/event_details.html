@@ -21,6 +21,39 @@
 
         <!-- Event details will be dynamically inserted here -->
     </section>
+    
+<!-- Write Review Button -->
+<div class="write-review-section" style="text-align: center; margin: 20px 0;">
+  <button id="writeReviewBtn" class="action-button primary">
+    <i class="fa-solid fa-pen"></i> Write Review
+  </button>
+</div>
+
+
+<div id="reviewPopup" class="popup">
+  <div class="popup-content">
+    <span class="close">&times;</span>
+    <form id="reviewForm">
+      <label for="reviewerChoice">Post as:</label>
+      <select id="reviewerChoice">
+        <option value="anonymous">Anonymous</option>
+        <option value="named">Named</option>
+      </select>
+
+      <div id="nameField" style="display: none;">
+        <input type="text" id="reviewerName" placeholder="Enter your name">
+      </div>
+
+      <textarea id="reviewText" placeholder="Write your review..."></textarea>
+      <div class="button-group">
+        <button type="submit" class="save-btn">Submit</button>
+        <button type="button" class="cancel-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
 
     <div class ="reviews"> 
         <!-- Elfsight All-in-One Reviews | Untitled All-in-One Reviews -->
@@ -34,7 +67,6 @@
     <script src="/js/header_footer.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script src="/js/event_details.js"></script>
-    <script src="/js/points.js"></script>
-    <script src="/js/tutorial_popup.js"></script>
 </body>
 </html>
+
