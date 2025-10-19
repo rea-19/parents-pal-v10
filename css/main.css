@@ -1037,26 +1037,20 @@ body {
     box-shadow: 0 2px 8px var(--text-color);
     z-index: 1000;
     width: 250px;
-    height: 750px;
-}
+    height: 300px;
 
-/*Box for input*/
-#suburbInput {
-    display: block;
-    max-width: 300px;         
-    margin-bottom: 1.5rem;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    text-align: center;   
-    border-radius: 8px;
-    border: 2px solid var(--muted-text);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex-wrap: nowrap;
 }
 
 /*Container for button filter*/
 .filter-button {
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 2rem;
     padding: 0.6rem 1rem;
     border: 2px solid var(--accent-green);
     background-color: var(--background-color);
@@ -1078,12 +1072,6 @@ body {
     width: 30px;
     height: 30px;
     object-fit: contain;
-}
-
-#categoryButtons {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
 }
 
 #eventDetailsPanel {
