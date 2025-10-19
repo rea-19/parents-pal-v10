@@ -6,12 +6,13 @@
 <title>My Events</title>
 <link rel="stylesheet" href="/css/main.css">
 <style>
-    /* ---------------- PROFILE MY EVENTS PAGE ---------------- */
     #my-events-page {
+        flex: 1; /* expand to take all remaining vertical space so that the footer remains at the bottom*/
         display: flex;
         gap: 20px;
         padding: 20px;
         flex-wrap: wrap;
+        box-sizing: border-box;
     }
 
     .events-container {
@@ -31,7 +32,6 @@
         color: var(--primary-color);
     }
 
-    /* ---------------- EVENT CARD ---------------- */
     .event-card {
     border-radius: 12px;
     overflow: hidden;
