@@ -1,4 +1,4 @@
-// ------------------- MAP INITIALIZATION ------------------- 
+// ------------------- MAP INITIALIZATION -------------------
 const map = L.map("map").setView([-27.47, 153.03], 11);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "Map data © OpenStreetMap contributors",
@@ -34,80 +34,66 @@ function createPopupHTML({ name, cost, date, address, description }) {
   `;
 }
 
-// ------------------- OPTIONAL GEOCODING -------------------
-async function geocodeAddress(address, retries = 3) {
-  if (!address) return null;
-  const encoded = encodeURIComponent(address);
-  const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encoded}`;
-
-  for (let i = 0; i < retries; i++) {
-    try {
-      await new Promise(r => setTimeout(r, 1500)); // delay between retries
-      const res = await fetch(url, { headers: { "Accept-Language": "en" } });
-      if (!res.ok) throw new Error("HTTP error " + res.status);
-      const data = await res.json();
-      if (data.length > 0) {
-        return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
-      }
-    } catch (e) {
-      console.warn(`Geocoding failed (attempt ${i + 1}) for ${address}:`, e);
-    }
-  }
-  console.error("❌ Could not geocode:", address);
-  return null;
-}
-
-// ------------------- KNOWN MARKET COORDINATES -------------------
-const knownMarketCoords = {
+// ------------------- PRE-GEOCODED LOCATIONS -------------------
+// Add all known locations here or from batch geocoding CSV/JSON
+const preGeocodedLocations = {
+  // Markets
   "Manly Creative Markets": [-27.4483, 153.1831],
   "Jan Power Manly Markets": [-27.447, 153.187],
   "Carseldine Farmers & Artisan Markets": [-27.354, 153.023],
   "Milton Markets": [-27.4732, 153.0029],
   "Nundah Farmers Market": [-27.4014, 153.0602],
   "BrisStyle Twilight Market": [-27.4689, 153.0235],
-  "Rocklea Sunday Discovery Market": [-27.5434, 153.0113]
+  "Rocklea Sunday Discovery Market": [-27.5434, 153.0113],
+
+  // Library Events (example)
+  "Garden City Library": [-27.5205, 153.0732],
+  "Chermside Library": [-27.4145, 153.0336],
+
+  // Infants & Toddlers Events (example)
+  "Little Bayside Park": [-27.4501, 153.1822],
+  "New Farm Park": [-27.4567, 153.0465]
 };
 
 // ------------------- PROCESS EVENTS -------------------
-async function processEvents(records) {
-  for (const record of records) {
+function processEvents(records) {
+  records.forEach(record => {
     const f = record.fields || {};
+    let coords = f.geo_point_2d || (record.geometry?.coordinates ? [...record.geometry.coordinates].reverse() : null);
 
-    let coords = f.geo_point_2d
-      || (record.geometry?.coordinates ? [...record.geometry.coordinates].reverse() : null)
-      || await geocodeAddress(f.location || f.venueaddress)
-      || [-27.47, 153.03]; // fallback
+    // Fallback to pre-geocoded
+    if (!coords && f.location && preGeocodedLocations[f.location]) {
+      coords = preGeocodedLocations[f.location];
+    }
+
+    if (!coords) return; // skip if no coordinates
 
     const popup = createPopupHTML({
       name: f.event_name || f.subject || "Event",
       cost: f.cost || "Free",
       date: f.start_datetime || f.formatteddatetime || "TBA",
-      address: f.location || f.venueaddress || "Address not available",
+      address: f.location || f.venueaddress || "",
       description: f.description || ""
     });
 
     L.marker(coords, { icon: iconEvents }).bindPopup(popup).addTo(allMarkers.events);
-  }
+  });
+
   console.log("✅ Finished processing events");
 }
 
 // ------------------- PROCESS MARKETS -------------------
-async function processMarkets(records) {
-  console.log("Markets records loaded:", records.length);
-
-  for (const record of records) {
+function processMarkets(records) {
+  records.forEach(record => {
     const f = record.fields || {};
-    let searchAddress = f.venueaddress || f.location || "";
+    let coords = f.geo_point_2d || (record.geometry?.coordinates ? [...record.geometry.coordinates].reverse() : null);
 
-    if (searchAddress && !/brisbane|qld/i.test(searchAddress)) {
-      searchAddress += ", Brisbane, QLD, Australia";
+    // Fallback to pre-geocoded
+    if (!coords && f.event_name && preGeocodedLocations[f.event_name]) {
+      coords = preGeocodedLocations[f.event_name];
     }
 
-    let coords = f.geo_point_2d
-      || (record.geometry?.coordinates ? [...record.geometry.coordinates].reverse() : null)
-      || knownMarketCoords[f.event_name]
-      || await geocodeAddress(searchAddress)
-      || [-27.47, 153.03]; // fallback
+    if (!coords) return; // skip if no coordinates
 
     const popup = createPopupHTML({
       name: f.event_name || f.subject || "Market",
@@ -118,8 +104,7 @@ async function processMarkets(records) {
     });
 
     L.marker(coords, { icon: iconMarkets }).bindPopup(popup).addTo(allMarkers.markets);
-    await new Promise(r => setTimeout(r, 200)); // small pause to reduce server load
-  }
+  });
 
   console.log("✅ Finished processing markets");
 }
@@ -159,7 +144,7 @@ function processToilets(records) {
 
 // ------------------- FETCH DATA -------------------
 
-// Events (library + infants)
+// Events (live from Brisbane API)
 Promise.all([
   fetch("https://data.brisbane.qld.gov.au/api/records/1.0/search/?dataset=library-events&q=&rows=500").then(r => r.json()),
   fetch("https://data.brisbane.qld.gov.au/api/records/1.0/search/?dataset=infants-and-toddlers-events&q=&rows=500").then(r => r.json())
@@ -168,11 +153,11 @@ Promise.all([
   processEvents(toddlers.records);
 }).catch(err => console.error("Events fetch error:", err));
 
-// Markets
-fetch("https://data.brisbane.qld.gov.au/api/records/1.0/search/?dataset=markets-events&q=&rows=500")
-  .then(r => r.json())
-  .then(data => processMarkets(data.records))
-  .catch(err => console.error("Markets error:", err));
+// Markets (local JSON file)
+fetch("brisbane-city-council-events-locations.json")
+  .then(res => res.json())
+  .then(data => processMarkets(data))
+  .catch(err => console.error("Markets fetch error:", err));
 
 // Parks
 fetch("https://data.brisbane.qld.gov.au/api/records/1.0/search/?dataset=park-locations&q=&rows=500")
