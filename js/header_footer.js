@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
   loadHeader();
 });
 
-
 function loadHeader() {
   fetch("/html/include/header.html")
     .then(res => res.text())
@@ -19,7 +18,7 @@ function loadHeader() {
           navbar.style.backgroundColor = 'transparent';
           navbar.style.boxShadow = 'none';
           navbar.style.position = 'absolute';
-          navbar.querySelectorAll('a').forEach(link => link.style.color = '#fff'); // Optional: change link colors
+          navbar.querySelectorAll('a').forEach(link => link.style.color = '#fff'); 
         }
       }
 
@@ -33,15 +32,12 @@ function initHeader() {
   const navbarLinks = document.getElementById("navbar-links");
   const profileBtn = document.getElementById("profileBtn");
 
-  // Remove old dropdown if exists
   const oldDropdown = document.querySelector(".profile-dropdown");
   if (oldDropdown) oldDropdown.remove();
 
   if (loggedIn) {
-    // Hide regular profile link
     if (profileBtn) profileBtn.style.display = "none";
 
-    // Create dropdown
     const dropdown = document.createElement("div");
     dropdown.classList.add("dropdown", "profile-dropdown");
 
@@ -56,7 +52,6 @@ function initHeader() {
 
     if (navbarLinks) navbarLinks.appendChild(dropdown);
 
-    // Dropdown toggle
     const toggle = dropdown.querySelector(".dropdown-toggle");
     const menu = dropdown.querySelector(".dropdown-menu");
     toggle.onclick = e => {
@@ -64,7 +59,6 @@ function initHeader() {
       menu.style.display = menu.style.display === "block" ? "none" : "block";
     };
 
-    // Logout inside dropdown
     const logoutBtnDropdown = document.getElementById("logoutBtnDropdown");
     if (logoutBtnDropdown) {
       logoutBtnDropdown.onclick = e => {
@@ -73,13 +67,12 @@ function initHeader() {
           localStorage.removeItem("loggedIn");
           localStorage.removeItem("loggedInUser");
           alert("Logged out!");
-          loadHeader(); // Reload header
+          loadHeader(); 
         }
       };
     }
 
   } else {
-    // Logged out show normal profile button
     if (profileBtn) {
       profileBtn.style.display = "inline-block";
       profileBtn.href = "#";
@@ -97,42 +90,37 @@ function initHeader() {
       };
     }
 
-    initPopup(); // Popup logic for logged-out users
+    initPopup();
   }
 
   updateProgressBar();
 }
 
+// ==========================
+// Global Progress Bar Update
+// ==========================
 function updateProgressBar() {
   const loggedIn = localStorage.getItem("loggedIn") === "true";
   const notSignedInBar = document.getElementById("not-signedin-progressbar");
   const signedInBar = document.getElementById("signedin-progressbar");
-    // --- HIDE PROGRESS BAR ON HOMEPAGE ---
+
   const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
   if (isHomePage) {
     if (notSignedInBar) notSignedInBar.style.display = 'none';
     if (signedInBar) signedInBar.style.display = 'none';
-    return; // skip further logic
+    return;
   }
-  // -------------------------------------
-
 
   if (!notSignedInBar || !signedInBar) return;
 
   if (loggedIn) {
     notSignedInBar.style.display = "none";
     signedInBar.style.display = "block";
-
-    // Click redirects to profile page
     signedInBar.style.cursor = "pointer";
-    signedInBar.onclick = () => {
-      window.location.href = "/html/profile_rewards.html";
-    };
+    signedInBar.onclick = () => window.location.href = "/html/profile_rewards.html";
   } else {
     signedInBar.style.display = "none";
     notSignedInBar.style.display = "block";
-
-    // Click opens login/signup popup
     notSignedInBar.style.cursor = "pointer";
     notSignedInBar.onclick = () => {
       const popup = document.getElementById("popupContainer");
@@ -147,7 +135,7 @@ function updateProgressBar() {
   }
 }
 
-// Apply saved points to the visible progress bars on all html page
+// Apply saved points to progress bars
 function applySavedRewardsToBars() {
   const loggedInUser = localStorage.getItem('loggedInUser') || 'guest';
   const storageKey = `rewards_${loggedInUser}`;
@@ -161,77 +149,35 @@ function applySavedRewardsToBars() {
       if (typeof parsed.goal === 'number') goal = parsed.goal;
     }
   } catch (e) {
-    console.warn('Failed to read saved rewards in header:', e);
+    console.warn('Failed to read saved rewards:', e);
   }
 
   const percentage = goal && goal > 0 ? Math.min((userPoints / goal) * 100, 100) : 0;
 
-  // Update signed-in bar fill and text 
   const signedInBar = document.getElementById('signedin-progressbar');
   if (signedInBar) {
-    const fill = signedInBar.querySelector('.progress-done') || signedInBar.querySelector('#progress-fill');
+    const fill = signedInBar.querySelector('.progress-done');
+    if (fill) fill.style.width = `${percentage}%`;
     const text = signedInBar.querySelector('#point-text');
-    const runner = signedInBar.querySelector('#runner');
-    if (fill) {
-      // animate fill from 0 -> percentage
-      fill.style.transition = 'none';
-      fill.style.width = '0%';
-      fill.getBoundingClientRect();
-      requestAnimationFrame(() => {
-        fill.style.transition = 'width 0.5s ease-in-out';
-        fill.style.width = `${percentage}%`;
-      });
-    }
     if (text) text.innerText = `${userPoints}/${goal}`;
-    if (runner) {
-      // animate runner from 0 -> target
-      runner.style.transition = 'none';
-      runner.style.left = `0%`;
-      runner.getBoundingClientRect();
-      requestAnimationFrame(() => {
-        runner.style.transition = 'left 0.5s ease-in-out';
-        runner.style.left = `${Math.max(percentage - 1, 0)}%`;
-      });
-    }
   }
 
-  // Update not-signed-in bar (visible when logged out)
   const notSignedInBar = document.getElementById('not-signedin-progressbar');
   if (notSignedInBar) {
     const fill = notSignedInBar.querySelector('#progress-fill');
+    if (fill) fill.style.width = `${percentage}%`;
     const text = notSignedInBar.querySelector('#point-text');
-    const runner = notSignedInBar.querySelector('#runner');
-    if (fill) {
-      fill.style.transition = 'none';
-      fill.style.width = '0%';
-      fill.getBoundingClientRect();
-      requestAnimationFrame(() => {
-        fill.style.transition = 'width 0.5s ease-in-out';
-        fill.style.width = `${percentage}%`;
-      });
-    }
     if (text) text.innerText = userPoints > 0 ? `You have ${userPoints} points` : text.innerText;
-    if (runner) {
-      runner.style.transition = 'none';
-      runner.style.left = '0%';
-      runner.getBoundingClientRect();
-      requestAnimationFrame(() => {
-        runner.style.transition = 'left 0.5s ease-in-out';
-        runner.style.left = `${Math.max(percentage - 1, 0)}%`;
-      });
-    }
   }
 }
 
-// call once after header init so bars reflect saved values immediately
 document.addEventListener('DOMContentLoaded', () => {
-  // if header is already injected, apply immediately; otherwise updateProgressBar will call when ready
   setTimeout(applySavedRewardsToBars, 50);
 });
 
-
-
-// Popup logic for logged-out users
+// ==========================
+// Signup/Login Popup Logic
+// ==========================
 function initPopup() {
   const popup = document.getElementById('popupContainer');
   const loginForm = document.getElementById('loginForm');
@@ -276,7 +222,12 @@ function initPopup() {
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem("loggedInUser", email);
 
-    alert("Signup successful!");
+    // ===== Add 15 points for new signup =====
+    const storageKey = `rewards_${email}`;
+    localStorage.setItem(storageKey, JSON.stringify({ userPoints: 15, goal: 50 }));
+    if (typeof window.addPoints === "function") window.addPoints(0); // refresh progress bar
+
+    alert("Signup successful! You earned 15 points as a welcome bonus!");
     popup.style.display = "none";
     initHeader();
   });
@@ -298,7 +249,7 @@ function initPopup() {
   });
 }
 
-// load footer
+// Load footer
 fetch("/html/include/footer.html")
   .then(res => res.text())
   .then(data => document.getElementById("footer").innerHTML = data);
