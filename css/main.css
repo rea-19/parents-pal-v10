@@ -2491,3 +2491,82 @@ CHATGPT USED - ADJUST THIS*/
   object-fit: cover;
   border-radius: 0;
 }
+
+/* Make slideshow images cover entire slider */
+.slideshow-with-text .slides {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+}
+
+.slideshow-with-text .slide {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.slideshow-with-text .displaySlide {
+  display: block;
+}
+
+/* Add semi-transparent black overlay behind the text */
+.slideshow-with-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45); /* black with opacity */
+  z-index: 2;
+  pointer-events: none; /* so buttons are still clickable */
+}
+
+/* Position the existing .our-story on top of overlay */
+.slideshow-with-text .our-story {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+  max-width: 700px;
+}
+
+/* Optional: modern button styling */
+.slideshow-with-text .browse-events-button {
+  background-color: #00a651;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+/* Navigation arrows above overlay */
+.slideshow-with-text .next,
+.slideshow-with-text .previous {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  font-size: 30px;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.slideshow-with-text .next { right: 20px; }
+.slideshow-with-text .previous { left: 20px; }
