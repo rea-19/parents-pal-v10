@@ -7,7 +7,22 @@ function loadHeader() {
   fetch("/html/include/header.html")
     .then(res => res.text())
     .then(data => {
-      document.getElementById("header").innerHTML = data;
+      const headerDiv = document.getElementById("header");
+      headerDiv.innerHTML = data;
+
+      const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
+      if (isHomePage) {
+        headerDiv.classList.add('transparent-header-container'); 
+
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+          navbar.style.backgroundColor = 'transparent';
+          navbar.style.boxShadow = 'none';
+          navbar.style.position = 'absolute';
+          navbar.querySelectorAll('a').forEach(link => link.style.color = '#fff'); // Optional: change link colors
+        }
+      }
+
       initHeader();
     })
     .catch(err => console.error("Error loading header:", err));
@@ -92,6 +107,15 @@ function updateProgressBar() {
   const loggedIn = localStorage.getItem("loggedIn") === "true";
   const notSignedInBar = document.getElementById("not-signedin-progressbar");
   const signedInBar = document.getElementById("signedin-progressbar");
+    // --- HIDE PROGRESS BAR ON HOMEPAGE ---
+  const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
+  if (isHomePage) {
+    if (notSignedInBar) notSignedInBar.style.display = 'none';
+    if (signedInBar) signedInBar.style.display = 'none';
+    return; // skip further logic
+  }
+  // -------------------------------------
+
 
   if (!notSignedInBar || !signedInBar) return;
 
