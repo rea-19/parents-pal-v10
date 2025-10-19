@@ -33,14 +33,16 @@
 
     /* ---------------- EVENT CARD ---------------- */
     .event-card {
-        border-radius: 12px;
-        overflow: hidden;
-        margin-bottom: 15px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        position: relative;
-        display: flex;
-        flex-direction: column;
-    }
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0 auto 15px auto;  /* centers the card with bottom margin */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;  /* slightly narrower than full column */
+}
+
 
     .event-card .image-container {
         position: relative;
