@@ -1849,198 +1849,17 @@ CHATGPT USED - ADJUST THIS*/
 
 
 
-.reward-buttons {
-  display: flex;
-  justify-content: center;   /* centers horizontally */
-  gap: 1rem;                 /* space between buttons */
-  margin-top: 1.5rem;
-  padding-bottom: 2rem;      /* 👈 adds space underneath */
-}
-
-.reward-buttons a {
-  background-color: #8FC73B; /* green background */
-  color: white;              /* white text */
-  text-decoration: none;     /* remove underline */
-  padding: 12px 24px;        /* button-like padding */
-  border-radius: 10px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.reward-buttons a:hover {
-  background-color: #7BB832; /* slightly darker green */
-  transform: translateY(-2px);
-}
-
-/* outlined button variant */
-.btn-outline {
-  background-color: transparent;
-  color: #8FC73B;
-  border: 2px solid #8FC73B;
-}
-
-.btn-outline:hover {
-  background-color: #8FC73B;
-  color: white;
-}
-/* Styles for the Transparent Header ONLY on the Index Page */
-/* Ensure homepage navbar is on top of slideshow */
-
-
-/* 1. Make the hero wrapper the positioning reference and remove unwanted top padding */
-.hero-content-wrapper {
-    position: relative; 
-    padding-top: 0 !important; 
-    margin: 0 !important;
-}
-
-/* 2. Position the outer header wrapper absolutely */
-#header.transparent-header-container {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    z-index: 9999; /* Ensure it's on top */
-}
-
-/* 3. Override default navbar styles */
-.transparent-header-container #navbar {
-    background-color: transparent !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    height: auto !important; /* CRITICAL: Remove fixed height */
-    position: relative !important; /* Keep relative inside the absolute #header */
-    padding: 10px 40px !important; /* Consistent padding */
-}
-
-/* 4. Text color overrides (These seem correct) */
-.transparent-header-container #logo,
-.transparent-header-container #navbar-links a,
-.transparent-header-container .dropdown-toggle,
-.transparent-header-container .dropdown-toggle:hover {
-    color: #fff !important; 
-}
-
-/* 5. Green color fix (Also seems correct) */
-.transparent-header-container #logo .green {
-    color: #8FC73B !important; 
-}
-.slide {
-  display: none;
-}
-
-.slide.active {
-  display: block;
-}
-
-.slide img {
-  width: 100%;
-  height: 600px;
-  object-fit: cover;
-  border-radius: 0;
-}
-
-/* Make slideshow images cover entire slider */
-.slideshow-with-text .slides {
-  position: relative;
-  width: 100%;
-  height: 600px;
-  overflow: hidden;
-}
-
-.slideshow-with-text .slide {
-  width: 100%;
-  height: 600px;
-  object-fit: cover;
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.slideshow-with-text .displaySlide {
-  display: block;
-}
-
-/* Add semi-transparent black overlay behind the text */
-.slideshow-with-text::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45); /* black with opacity */
-  z-index: 2;
-  pointer-events: none; /* so buttons are still clickable */
-}
-
-/* Position the existing .our-story on top of overlay */
-.slideshow-with-text .our-story {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  text-align: center;
-  color: #fff;
-  max-width: 700px;
-}
-
-/* modern button styling */
-.slideshow-with-text .browse-events-button {
-  background-color: #00a651;
-  color: #fff;
-  padding: 12px 25px;
-  border-radius: 8px;
-  font-weight: bold;
-  text-decoration: none;
-  margin-top: 20px;
-  display: inline-block;
-}
-
-/* Navigation arrows above overlay */
-.slideshow-with-text .next,
-.slideshow-with-text .previous {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 4;
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  border: none;
-  font-size: 30px;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.slideshow-with-text .next { right: 20px; }
-.slideshow-with-text .previous { left: 20px; }
-
-
-
-
-
-
-
-
-
-
-
-/*REWARDS*/
+/* REWARDS */
 .card-section {
-    display: flex;
-    justify-content: center;
-    padding: 2rem;
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem; /* reduced from 2rem to condense layout */
 }
-
 
 .membership-card {
   background: var(--background-color);
   border-radius: 10px;
-  padding: 1.5rem;
+  padding: 1rem; /* reduced padding */
   position: relative;
   width: 350px;
   text-align: center;
@@ -2101,24 +1920,25 @@ CHATGPT USED - ADJUST THIS*/
 .card-back {
   transform: rotateY(180deg);
 }
+
 /* Buttons below the card */
 .card-buttons {
   display: flex;
   justify-content: center;
-  gap: 1.25rem; /* slightly increased spacing between buttons */
-  margin-top: 0.5rem; /* reduced space above the button row */
-  margin-bottom: 0.5rem; /* reduced space below the button row */
+  gap: 1.25rem;
+  margin-top: 0.3rem; /* tighter spacing above */
+  margin-bottom: 0.3rem; /* tighter spacing below */
 }
 
 /* Wallet and Flip buttons */
 .wallet-btn,
 .flip-btn {
-  padding: 0.5rem 1rem; /* same button size */
+  padding: 0.5rem 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   background: var(--button-background, #7ab42e);
-  color: #fff; /* white text */
+  color: #fff;
   transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
@@ -2129,19 +1949,20 @@ CHATGPT USED - ADJUST THIS*/
   transform: translateY(-2px);
 }
 
+/* Info Banner */
 .info-banner details {
   background: #f9fffb;
   border: 2px solid #8FC73B;
   border-radius: 12px;
   padding: 12px 16px;
   max-width: 90%;
-  margin: 20px auto;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin: 15px auto; /* slightly reduced spacing */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .info-banner summary {
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: normal; /* removed bolding */
   color: #8FC73B;
   cursor: pointer;
   list-style: none;
@@ -2149,15 +1970,18 @@ CHATGPT USED - ADJUST THIS*/
   text-align: center;
 }
 
+/* Rewards Section */
+
 .rewards {
   text-align: center;
-  padding: 2rem;
+  padding: 1rem; /* reduced from 2rem */
 }
 
 .rewards h2 {
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  font-size: 2em; /* adjust as needed */
+  font-size: 2.2em;
+  margin-bottom: 0.4rem; /* ↓ reduced by ~60% */
 }
 
 .rewards .black-text {
@@ -2168,12 +1992,13 @@ CHATGPT USED - ADJUST THIS*/
   color: #8FC73B;
 }
 
+/* Rewards Grid */
 .rewards-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.5rem; /* kept smaller gap for consistency */
-  margin-top: 2rem;
+  gap: 0.75rem; /* slightly more space between cards */
+  margin-top: 1.5rem; /* reduced */
 }
 
 /* Responsive stacking on mobile */
@@ -2188,14 +2013,14 @@ CHATGPT USED - ADJUST THIS*/
   }
 }
 
-/* Individual card container */
+/* Reward Card */
 .reward-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 360px;
+  width: 414px; /* increased by 15% from 360px */
   max-width: 100%;
-  padding: 1.5rem;
+  padding: 1.25rem; /* slightly reduced inner padding */
   text-align: center;
   background: var(--background-color);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -2206,7 +2031,6 @@ CHATGPT USED - ADJUST THIS*/
   transform: translateY(-5px);
   box-shadow: 0 4px 10px rgba(143, 199, 59, 0.25);
 }
-
 
 /* Reward content container */
 .reward-content {
@@ -2219,18 +2043,18 @@ CHATGPT USED - ADJUST THIS*/
   background: white;
 }
 
-/* The main reward image */
+/* Reward image */
 .reward-img {
   width: 85%;
   height: auto;
   display: block;
 }
 
-/* The right column text (“SET GOAL” or “CURRENT GOAL”) */
+/* Reward side text (“SET GOAL” / “CURRENT GOAL”) */
 .reward-side {
   width: 15%;
   background: #fff;
-  color: #D6A300; /* gold color */
+  color: #D6A300;
   font-weight: bold;
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -2247,47 +2071,3 @@ CHATGPT USED - ADJUST THIS*/
   color: white;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Buttons inside the reward cards */
-/*.goal-btn {
-  background-color: #8FC73B;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Hover effect */
-/*.goal-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
