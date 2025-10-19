@@ -183,13 +183,15 @@ body {
     box-sizing: border-box;
     background-color: var(--background-color);
     padding: 10px 0px 10px;
+    position: relative;
 }
 
 #progress-bar {
     background-color: rgba(145, 191, 77, 0.5);
     position: relative;
     height: 22px;
-    width: 95%; 
+    width: 95%;            
+    margin: 0 auto;        
     border-radius: 10px;
     overflow: hidden;
 }
@@ -234,14 +236,17 @@ body {
 }
 
 /* runner icon */
+/* runner: center horizontally on the left percentage using translate(-50%, -50%)
+   so setting left to X% will place the runner centered at that point */
 #runner {
     position: absolute;
     top: 50%;
     left: 69%;
-    transform: translate(-50%, -50%) scaleX(1); 
+    transform: translate(-50%, -50%);
     font-size: 20px;
     z-index: 3;
     transition: left 0.5s ease-in-out;
+    pointer-events: none; /* runner shouldn't block clicks on progress */
 }
 
 
@@ -665,6 +670,306 @@ body {
     background-color: #43a047;
 }
 
+<<<<<<< HEAD
+=======
+/* profile and rewards */
+.card-section {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.membership-card {
+    background: var(--background-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    position: relative;
+    width: 350px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.points-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: gold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.wallet-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.wallet-btn:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+/* back side flipped */
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* flipping animation */
+.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Buttons below card */
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.wallet-btn,
+.flip-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--button-background, #7ab42e);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.wallet-btn:hover,
+.flip-btn:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+
+.rewards {
+    text-align: center;
+    padding: 2rem;
+}
+
+.rewards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/*delete soon*/
+.rewards {
+  text-align: center;
+  padding: 2rem;
+}
+
+.rewards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Individual card container */
+.reward-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 360px; /* roughly phone width */
+  max-width: 100%;
+}
+
+/* Flex layout for image + side label */
+.reward-content {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  background: white;
+}
+
+/* The main reward image */
+.reward-img {
+  width: 85%;
+  height: auto;
+  display: block;
+}
+
+/* The right column text (“SET GOAL” or “CURRENT GOAL”) */
+.reward-side {
+  width: 15%;
+  background: #fff;
+  color: #D6A300; /* gold color */
+  font-weight: bold;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-align: center;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Current goal highlight */
+.current-side {
+  background: #D6A300;
+  color: white;
+}
+
+/* Button section below each card */
+.reward-button {
+  margin-top: 0.5rem;
+}
+
+.goal-btn {
+  background: #8FC73B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.goal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Responsive stacking on mobile */
+@media (max-width: 480px) {
+  .rewards-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reward-card {
+    width: 90%;
+  }
+}
+
+/*undelete*/
+
+
+/* Each reward card box */
+.reward-card {
+  width: 200px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--background-color);
+}
+
+/* Hover effect to lift slightly */
+.reward-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(143, 199, 59, 0.25); 
+}
+
+/* Buttons inside the reward cards */
+.goal-btn {
+  background-color: #8FC73B;  
+  color: white;
+  border: none;              
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Membership Card Interactivity */
+
+/* Card animation container */
+.membership-card {
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Expand and glow on click */
+.membership-card:active {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #7ab42e(255, 215, 0, 0.7);
+}
+
+/* Inner rotating card */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 220px; 
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  border-radius: 16px;
+  overflow: visible; 
+}
+
+/* The actual front and back faces */
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+/* When flipped */
+.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Buttons layout */
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.flip-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.flip-btn:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Expand and glow only around the card image */
+.membership-card:active .card-face img {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #7ab42e(255, 215, 0, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* Reset glow when not pressed */
+.card-face img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px;
+}
+>>>>>>> d565e276970f7b4523afcc7b9fc739b4bc8e38d9
 
 /* map section */
 /* Rewards Section Steps (How To) */
@@ -943,12 +1248,8 @@ body {
 }
 
 .video {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
+    width: 320;
+    height: 240;
 }
 
 /* Rewards Section */
@@ -1012,6 +1313,10 @@ body {
 
 /*index page - photo slideshow*/
 /*image slideshow home page*/
+.hero-content-wrapper{
+    padding-top: 2%;
+}
+
 .slider {
     position: relative;
     width: 100%;
@@ -1058,7 +1363,6 @@ body {
   align-items: center;
   z-index: 99999;
   backdrop-filter: blur(5px);
-  animation: fadeInBg 0.3s ease forwards;
 }
 
 /*  POPUP CARD */
@@ -1289,7 +1593,6 @@ body {
     margin-right: 10px;
     font-size: 24px; /* Ensure FA icons match the size of the new images */
     width: 24px;     /* Give it a fixed width for alignment */
-    text-align: center;
 }
 /* Event image and title */
 .event-image-header {

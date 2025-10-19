@@ -1,33 +1,39 @@
-<link rel="stylesheet" href="/css/main.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-    
-    <div id="header"></div>
 
-<section class="hero-content-wrapper"> 
 
+    <section class="hero-content-wrapper"> 
+        <div id="header"></div>
         <section class="slideshow-with-text">
 
             <div class="slider">
                 <div class="slides">
-                    </div>
+                </div>
                 <button class="next" onclick="nextSlide()">&#10095;</button>
                 <button class="previous" onclick="previousSlide()">&#10094;</button>
-
             </div>
 
-            <!-- Our Story text over the slideshow -->
             <div class="our-story">
                 <h2>
-                    <span style="color: #fff;">Our</span> 
-                    <span style="color: #8FC73B;">Story</span>
+                    <span>Our</span> 
+                    <span class="green">Story</span>
                 </h2>
                 <p>
-                    ParentPal is your go-to platform for discovering exciting and family-friendly events tailored to children of all ages. Designed with busy parents in mind, ParentPal makes it easy to explore what’s happening in your local area with just a few clicks. Whether you’re searching for music classes, sports activities, educational workshops, or fun weekend outings, the platform helps you find events that match your child’s interests and your family’s schedule.
-                    One of ParentPal’s standout features is its smart filtering system, allowing you to customise your search by age group, location, event type, or time of day. You can also save your preferences, ensuring that relevant events appear first every time you log in. As you engage with the platform, you’ll even have the chance to collect rewards that can be used toward future events—helping families not only plan better but also save along the way.
+                    ParentPal is your go-to platform for discovering exciting and family-friendly events
+                    tailored to children of all ages. Designed with busy parents in mind, ParentPal makes
+                    it easy to explore what’s happening in your local area with just a few clicks.
                 </p>
+                <a href="/html/browse_events.html" class="browse-events-button">Browse Events</a>
             </div>
         </section>
+<<<<<<< HEAD
 
         <div style="text-align:center;">
             <img src="/src/home_user_journey.png" alt="User Journey" style="width:70%; padding:50px 0;">
@@ -38,7 +44,21 @@
             <h3>Browse Events</h3>
         </a>
 
+=======
+>>>>>>> d565e276970f7b4523afcc7b9fc739b4bc8e38d9
     </section>
+
+    <section class="user-journey-image-section">
+        <h2>**<span style="color: #000;">EARN AS YOU</span> <span class="green">EXPLORE</span>**</h2>
+        
+        <img src="/src/home_user_journey.png" alt="User journey steps: Sign Up, Book, Scan, Leave a Review to earn rewards." class="home-user-journey-img">
+
+        <div class="reward-buttons">
+            <a href="/html/browse_events.html" class="btn-green">Browse Events</a>
+            <a href="/html/profile_rewards.html" class="btn-outline">Rewards</a>
+        </div>
+    </section>
+
 
     <div id="footer"></div>
 

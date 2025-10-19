@@ -123,6 +123,90 @@ function updateProgressBar() {
   }
 }
 
+// Apply saved points to the visible progress bars on all html page
+function applySavedRewardsToBars() {
+  const loggedInUser = localStorage.getItem('loggedInUser') || 'guest';
+  const storageKey = `rewards_${loggedInUser}`;
+  let userPoints = 0;
+  let goal = 50;
+  try {
+    const raw = localStorage.getItem(storageKey);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (typeof parsed.userPoints === 'number') userPoints = parsed.userPoints;
+      if (typeof parsed.goal === 'number') goal = parsed.goal;
+    }
+  } catch (e) {
+    console.warn('Failed to read saved rewards in header:', e);
+  }
+
+  const percentage = goal && goal > 0 ? Math.min((userPoints / goal) * 100, 100) : 0;
+
+  // Update signed-in bar fill and text 
+  const signedInBar = document.getElementById('signedin-progressbar');
+  if (signedInBar) {
+    const fill = signedInBar.querySelector('.progress-done') || signedInBar.querySelector('#progress-fill');
+    const text = signedInBar.querySelector('#point-text');
+    const runner = signedInBar.querySelector('#runner');
+    if (fill) {
+      // animate fill from 0 -> percentage
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+      fill.getBoundingClientRect();
+      requestAnimationFrame(() => {
+        fill.style.transition = 'width 0.5s ease-in-out';
+        fill.style.width = `${percentage}%`;
+      });
+    }
+    if (text) text.innerText = `${userPoints}/${goal}`;
+    if (runner) {
+      // animate runner from 0 -> target
+      runner.style.transition = 'none';
+      runner.style.left = `0%`;
+      runner.getBoundingClientRect();
+      requestAnimationFrame(() => {
+        runner.style.transition = 'left 0.5s ease-in-out';
+        runner.style.left = `${Math.max(percentage - 1, 0)}%`;
+      });
+    }
+  }
+
+  // Update not-signed-in bar (visible when logged out)
+  const notSignedInBar = document.getElementById('not-signedin-progressbar');
+  if (notSignedInBar) {
+    const fill = notSignedInBar.querySelector('#progress-fill');
+    const text = notSignedInBar.querySelector('#point-text');
+    const runner = notSignedInBar.querySelector('#runner');
+    if (fill) {
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+      fill.getBoundingClientRect();
+      requestAnimationFrame(() => {
+        fill.style.transition = 'width 0.5s ease-in-out';
+        fill.style.width = `${percentage}%`;
+      });
+    }
+    if (text) text.innerText = userPoints > 0 ? `You have ${userPoints} points` : text.innerText;
+    if (runner) {
+      runner.style.transition = 'none';
+      runner.style.left = '0%';
+      runner.getBoundingClientRect();
+      requestAnimationFrame(() => {
+        runner.style.transition = 'left 0.5s ease-in-out';
+        runner.style.left = `${Math.max(percentage - 1, 0)}%`;
+      });
+    }
+  }
+}
+
+// call once after header init so bars reflect saved values immediately
+document.addEventListener('DOMContentLoaded', () => {
+  // if header is already injected, apply immediately; otherwise updateProgressBar will call when ready
+  setTimeout(applySavedRewardsToBars, 50);
+});
+
+
+
 // Popup logic for logged-out users
 function initPopup() {
   const popup = document.getElementById('popupContainer');
@@ -190,7 +274,7 @@ function initPopup() {
   });
 }
 
-// --- Load Footer ---
+// load footer
 fetch("/html/include/footer.html")
   .then(res => res.text())
   .then(data => document.getElementById("footer").innerHTML = data);
