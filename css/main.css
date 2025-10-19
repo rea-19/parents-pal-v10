@@ -967,7 +967,7 @@ body {
 /* MAP SECTION ON MAP PAGE */
 #map-container {
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -981,7 +981,7 @@ body {
 #map {
     height: 100%;
     width: 100%;
-    max-width: 1000px;
+    max-width: 2000px;
     border: 2px solid var(--background-color);
     border-radius: 8px;
 }
@@ -997,6 +997,7 @@ body {
     box-shadow: 0 2px 8px var(--text-color);
     z-index: 1000;
     width: 250px;
+    height: 750px;
 }
 
 /*Box for input*/
@@ -1698,6 +1699,7 @@ CHATGPT USED - ADJUST THIS*/
 
 }
 
+<<<<<<< HEAD
 
 .info-banner details {
   background: #f9fffb;
@@ -1733,3 +1735,127 @@ CHATGPT USED - ADJUST THIS*/
   color: #8FC73B;
 }
 
+=======
+/* ---------------- SMALL POPUP ---------------- */
+#tutorial-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 280px;               /* fixed width */
+  background: #0f9d58;        /* green background */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.3s;
+}
+
+#tutorial-popup:hover {
+  transform: scale(1.05);
+}
+
+/* Title */
+#tutorial-title {
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+/* Thumbnail wrapper */
+#tutorial-thumb {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;   /* 16:9 aspect ratio */
+  background: #fff;       /* fallback background */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Thumbnail image */
+#tutorial-thumb img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* scale image to fill container without distortion */
+}
+
+/* Play button */
+#play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  color: #0f9d58; /* green button matching popup */
+  opacity: 0.9;
+  transition: transform 0.3s;
+}
+
+#tutorial-popup:hover #play-button {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* ---------------- MODAL ---------------- */
+#tutorial-modal {
+  display: none;          /* hidden by default */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+#modal-content {
+  background: #111;
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 800px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+#tutorial-video {
+  width: 100%;        /* fill modal width */
+  max-height: 450px;  /* prevents it from being too tall */
+  border-radius: 8px;
+  display: block;     /* ensures proper rendering */
+}
+
+#modal-text {
+  color: #fff;
+  margin-top: 12px;
+  font-size: 14px;
+  text-align: center;
+}
+
+#visit-resources {
+  color: #0f9d58; /* green accent to match popup */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Close button */
+#modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  color: #fff;
+  cursor: pointer;
+}
+>>>>>>> ee834edfacd49957c3717d93737dc63becc59182

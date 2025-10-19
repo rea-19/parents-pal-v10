@@ -1,61 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <!--Leaflet library-->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resources Map</title>
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-    <!--Header-->
-    <div id="header"></div>
 
-    <!--Map settings-->
-    <main class="layout">
-        <div id="map-container">
-            <div id="map"></div>
-        </div>
-        
-        <!--Buttons for filters-->
-        <div id="controls">
-            <input type="text" id="suburbInput" placeholder="Enter Your Suburb...">
-            <div id="categoryButtons">
-                <button class="filter-button" data-type="events">
-                    <img src="/src/events-green.png" alt="Events icon">
-                    <span>Events</span>
-                </button>
-                <button class="filter-button" data-type="markets">
-                    <img src="/src/markets-green.png" alt="Markets icon">
-                    <span>Markets</span>
-                    </button>
-                <button class="filter-button" data-type="parks">
-                    <img src="/src/park-green.png" alt="Parks icon">
-                    <span>Parks</span>
-                </button>
-                <button class="filter-button" data-type="toilet">
-                    <img src="/src/toilet-green.png" alt="Toilet icon">
-                    <span>Toilet</span>
-                </button>
-            </div>
-        </div>
-        <div id="eventDetailsPanel" class="details-panel hidden">
-            <h2>Details</h2>
-            <p>Select a marker to see more information here.</p>
-        </div>
+  <!-- Header -->
+  <div id="header"></div>
 
-    </main>
+  <!-- Main Layout -->
+  <main class="layout">
+    <div id="map-container">
+      <div id="map" style="height: 100vh;"></div>
+    </div>
 
+    <!-- Filter Buttons -->
+    <div id="controls">
+      <button class="filter-button" data-type="events">
+        <img src="/src/events-black.png" alt="Events" />
+        <span>Events</span>
+      </button>
+      <button class="filter-button" data-type="markets">
+        <img src="/src/markets-black.png" alt="Markets" />
+        <span>Markets</span>
+      </button>
+      <button class="filter-button" data-type="parks">
+        <img src="/src/park-black.png" alt="Parks" />
+        <span>Parks</span>
+      </button>
+      <button class="filter-button" data-type="toilet">
+        <img src="/src/toilet-black.png" alt="Toilets" />
+        <span>Toilets</span>
+      </button>
+    </div>
+  </main>
 
-    <!--Header & Footer JS-->
-    <div id="footer"></div>
-    <script src="/js/header_footer.js"></script>
-    <!--Leaflet JS-->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <!--In page JS-->
-    <script src="/js/map.js"></script>
-    <script src="/js/tutorial_popup.js"></script>
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="/js/header_footer.js"></script>
+  <script src="/js/map.js"></script>
+  <script src="/js/tutorial_popup.js"></script>
+
 </body>
 </html>
