@@ -670,8 +670,6 @@ body {
     background-color: #43a047;
 }
 
-<<<<<<< HEAD
-=======
 /* profile and rewards */
 .card-section {
     display: flex;
@@ -740,6 +738,7 @@ body {
 
 .wallet-btn,
 .flip-btn {
+    height: 100px;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 8px;
@@ -969,7 +968,6 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 16px;
 }
->>>>>>> d565e276970f7b4523afcc7b9fc739b4bc8e38d9
 
 /* map section */
 /* Rewards Section Steps (How To) */
@@ -1045,20 +1043,26 @@ body {
     box-shadow: 0 2px 8px var(--text-color);
     z-index: 1000;
     width: 250px;
-    height: 300px;
+    height: 750px;
+}
 
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    flex-wrap: nowrap;
+/*Box for input*/
+#suburbInput {
+    display: block;
+    max-width: 300px;         
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    text-align: center;   
+    border-radius: 8px;
+    border: 2px solid var(--muted-text);
 }
 
 /*Container for button filter*/
 .filter-button {
-    width: 100%;
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 0.5rem;
     padding: 0.6rem 1rem;
     border: 2px solid var(--accent-green);
     background-color: var(--background-color);
@@ -1080,6 +1084,12 @@ body {
     width: 30px;
     height: 30px;
     object-fit: contain;
+}
+
+#categoryButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 #eventDetailsPanel {
