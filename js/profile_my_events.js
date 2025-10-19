@@ -18,7 +18,7 @@ $(document).ready(function() {
                         <p><strong>Location:</strong> ${event.location || "N/A"}</p>
                         <div class="card-buttons">
                             <button class="view-details-btn">View Details</button>
-                            <button class="remove-btn">Not Interested</button>
+                            <button class="remove-btn">Not Interested Anymore</button>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
         // Remove / Not Interested
         card.find(".remove-btn").click(function() {
-            if (confirm(`Are you sure you want to remove "${event.subject}"?`)) {
+            if (confirm(`This will remove this event from your list. Are you sure you want to remove "${event.subject}"?`)) {
                 let storageArray = JSON.parse(localStorage.getItem(type) || "[]");
                 storageArray = storageArray.filter(e => !(e.subject === event.subject && e.start_datetime === event.start_datetime));
                 localStorage.setItem(type, JSON.stringify(storageArray));
