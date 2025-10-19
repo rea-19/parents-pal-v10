@@ -665,21 +665,8 @@ body {
 }
 
 /* profile and rewards */
-.card-section {
-    display: flex;
-    justify-content: center;
-    padding: 2rem;
-}
 
-.membership-card {
-    background: var(--background-color);
-    border-radius: 10px;
-    padding: 1.5rem;
-    position: relative;
-    width: 350px;
-    text-align: center;
-    color: var(--text-color);
-}
+
 
 .points-badge {
     position: absolute;
@@ -885,18 +872,6 @@ body {
 
 /* Membership Card Interactivity */
 
-/* Card animation container */
-.membership-card {
-    perspective: 1000px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Expand and glow on click */
-.membership-card:active {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #7ab42e(255, 215, 0, 0.7);
-}
 
 /* Inner rotating card */
 .card-inner {
@@ -933,14 +908,6 @@ body {
     justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
-}
-
-
-/* Expand and glow only around the card image */
-.membership-card:active .card-face img {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px #7ab42e(255, 215, 0, 0.7);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 
@@ -2067,21 +2034,7 @@ CHATGPT USED - ADJUST THIS*/
 
 
 /* profile and rewards */
-.card-section {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-}
 
-.membership-card {
-    background: var(--background-color);
-    border-radius: 10px;
-    padding: 0.5rem;
-    position: relative;
-    width: 350px;
-    text-align: center;
-    color: var(--text-color);
-}
 
 .points-badge {
     position: absolute;
@@ -2269,20 +2222,6 @@ CHATGPT USED - ADJUST THIS*/
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Membership Card Interactivity */
-
-/* Card animation container */
-.membership-card {
-    perspective: 1000px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Expand and glow on click */
-.membership-card:active {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #7ab42e(255, 215, 0, 0.7);
-}
 
 /* Inner rotating card */
 .card-inner {
@@ -2331,13 +2270,6 @@ CHATGPT USED - ADJUST THIS*/
 
 .flip-btn:hover {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Expand and glow only around the card image */
-.membership-card:active .card-face img {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px #7ab42e(255, 215, 0, 0.7);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 
@@ -2552,3 +2484,91 @@ CHATGPT USED - ADJUST THIS*/
 
 .slideshow-with-text .next { right: 20px; }
 .slideshow-with-text .previous { left: 20px; }
+
+
+
+
+
+
+
+
+
+
+
+/*REWARDS*/
+.card-section {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.card-section {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.membership-card {
+    background: var(--background-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    position: relative;
+    width: 350px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+/* Card animation container */
+.membership-card {
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Expand and glow on click */
+.membership-card:active {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #7ab42e(255, 215, 0, 0.7);
+}
+
+
+/* Expand and glow only around the card image */
+.membership-card:active .card-face img {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #7ab42e(255, 215, 0, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.membership-card {
+    background: var(--background-color);
+    border-radius: 10px;
+    padding: 0.5rem;
+    position: relative;
+    width: 350px;
+    text-align: center;
+    color: var(--text-color);
+}
+
+/* Membership Card Interactivity */
+
+/* Card animation container */
+.membership-card {
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Expand and glow on click */
+.membership-card:active {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #7ab42e(255, 215, 0, 0.7);
+}
+
+/* Expand and glow only around the card image */
+.membership-card:active .card-face img {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #7ab42e(255, 215, 0, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
