@@ -50,7 +50,7 @@ function iterateRecords(data) {
                         $('<span class="tag" id="points">').html(`
                             Points: ${points}
                             <span class="tooltip">
-                                <a href="/html/how_to_get_points.html">Go to tutorial</a>
+                                <a href="/html/resources_guide.html">Go to tutorial</a>
                             </span>
                         `),
                         $('<span class="tag">').text(location),

@@ -1472,7 +1472,22 @@ body {
 
 }
 
+.user-journey-image-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     
+  align-items: center;         
+  padding: 20px;
+  text-align: center;
+}
 
+.home-user-journey-img {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  display: block;
+  margin-bottom: 20px;
+}
 
 #not-signedin-progressbar {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
