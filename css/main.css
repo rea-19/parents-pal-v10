@@ -2277,7 +2277,7 @@ CHATGPT USED - ADJUST THIS*/
 }
 
 /*PROFILE_REWARDS CSS */
-/* profile and rewards */
+/* there is some repeating code, however majority is in the section below. */
 .card-section {
     display: flex;
     justify-content: center;
@@ -2294,15 +2294,7 @@ CHATGPT USED - ADJUST THIS*/
     color: var(--text-color);
 }
 
-.points-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: gold;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    font-weight: bold;
-}
+
 
 .wallet-btn {
     border: none;
@@ -2323,17 +2315,18 @@ CHATGPT USED - ADJUST THIS*/
   display: block;
 }
 
-/* back side flipped */
+/*Reference: https://www.bing.com/videos/riverview/relatedvideo?q=how+do+i+make+an+item+flip+js&&view=riverview&mmscn=mtsc&mid=F9EDC31DB5C106C22CCFF9EDC31DB5C106C22CCF&&aps=240&FORM=VMSOVR
+*/
 .card-back {
   transform: rotateY(180deg);
 }
 
-/* flipping animation */
+
 .flipped .card-inner {
   transform: rotateY(180deg);
 }
 
-/* Buttons below card */
+
 .card-buttons {
   display: flex;
   justify-content: center;
@@ -2376,11 +2369,11 @@ CHATGPT USED - ADJUST THIS*/
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 600px; 
+  width: 700px; 
   max-width: 100%;
 }
 
-/* Flex layout for image + side label */
+
 .reward-content {
   display: flex;
   align-items: stretch;
@@ -2391,18 +2384,18 @@ CHATGPT USED - ADJUST THIS*/
   background: white;
 }
 
-/* The main reward image */
+/* for the image*/
 .reward-img {
   width: 85%;
   height: auto;
   display: block;
 }
 
-/* The right column text (“SET GOAL” or “CURRENT GOAL”) */
+
 .reward-side {
   width: 15%;
   background: #fff;
-  color: #D6A300; /* gold color */
+  color: #D6A300; 
   font-weight: bold;
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -2413,16 +2406,8 @@ CHATGPT USED - ADJUST THIS*/
   justify-content: center;
 }
 
-/* Current goal highlight */
-.current-side {
-  background: #D6A300;
-  color: white;
-}
 
-/* Button section below each card */
-.reward-button {
-  margin-top: 0.5rem;
-}
+
 
 .goal-btn {
   background: #8FC73B;
@@ -2440,7 +2425,7 @@ CHATGPT USED - ADJUST THIS*/
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Responsive stacking on mobile */
+/* https://www.w3schools.com/css/css_rwd_mediaqueries.asp */
 @media (max-width: 480px) {
   .rewards-grid {
     flex-direction: column;
@@ -2454,7 +2439,7 @@ CHATGPT USED - ADJUST THIS*/
 
 
 
-/* Each reward card box */
+
 .reward-card {
   width: 200px;
   padding: 1.5rem;
@@ -2463,13 +2448,13 @@ CHATGPT USED - ADJUST THIS*/
   background: var(--background-color);
 }
 
-/* Hover effect to lift slightly */
+
 .reward-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 10px rgba(143, 199, 59, 0.25); 
 }
 
-/* Buttons inside the reward cards */
+
 .goal-btn {
   background-color: #8FC73B;  
   color: white;
@@ -2480,22 +2465,19 @@ CHATGPT USED - ADJUST THIS*/
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Membership Card Interactivity */
 
-/* Card animation container */
 .membership-card {
-    perspective: 1000px;
+    perspective: 1500px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Expand and glow on click */
 .membership-card:active {
     transform: scale(1.05);
     box-shadow: 0 0 20px #7ab42e(255, 215, 0, 0.7);
 }
 
-/* Inner rotating card */
+/*https://www.bing.com/videos/riverview/relatedvideo?q=how+do+i+make+an+item+flip+js&&view=riverview&mmscn=mtsc&mid=F9EDC31DB5C106C22CCFF9EDC31DB5C106C22CCF&&aps=240&FORM=VMSOVR*/
 .card-inner {
   position: relative;
   width: 100%;
@@ -2506,7 +2488,7 @@ CHATGPT USED - ADJUST THIS*/
   overflow: visible; 
 }
 
-/* The actual front and back faces */
+
 .card-front,
 .card-back {
     position: absolute;
@@ -2519,12 +2501,12 @@ CHATGPT USED - ADJUST THIS*/
     transform: rotateY(180deg);
 }
 
-/* When flipped */
+
 .flipped .card-inner {
     transform: rotateY(180deg);
 }
 
-/* Buttons layout */
+
 .card-buttons {
     display: flex;
     justify-content: center;
@@ -2533,7 +2515,7 @@ CHATGPT USED - ADJUST THIS*/
 }
 
 .flip-btn {
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -2544,7 +2526,7 @@ CHATGPT USED - ADJUST THIS*/
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Expand and glow only around the card image */
+
 .membership-card:active .card-face img {
   transform: scale(1.05);
   box-shadow: 0 0 25px #7ab42e(255, 215, 0, 0.7);
@@ -2552,22 +2534,21 @@ CHATGPT USED - ADJUST THIS*/
 }
 
 
-/* Reset glow when not pressed */
+
 .card-face img {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 16px;
 }
 
-/* --- Unified styling for Flip and Wallet buttons --- */
+
 .wallet-btn,
 .flip-btn {
-  flex: 1; /* equal width when side by side */
-  padding: 0.75rem 1.25rem; /* consistent size */
-  background-color: #8FC73B; /* same as other green buttons */
-  color: #fff; /* white text */
+  flex: 1; 
+  padding: 0.75rem 1.25rem; 
+  background-color: #8FC73B;
+  color: #fff; 
   border: none;
   border-radius: 8px;
-  cursor: pointer;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   font-weight: 500;
@@ -2603,7 +2584,7 @@ CHATGPT USED - ADJUST THIS*/
 .rewards h2 {
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  font-size: 2em; /* adjust as needed */
+  font-size: 2em; 
 }
 
 .rewards .black-text {
@@ -2616,13 +2597,13 @@ CHATGPT USED - ADJUST THIS*/
 
 .reward-buttons {
   display: flex;
-  justify-content: center;   /* centers horizontally */
-  gap: 1rem;                 /* space between buttons */
+  justify-content: center;
+  gap: 1rem;
   margin-top: 1.5rem;
-  padding-bottom: 2rem;      /* 👈 adds space underneath */
+  padding-bottom: 2rem;
 }
 
-/* --- Reset Flip and Wallet buttons --- */
+
 .wallet-btn,
 .flip-btn {
   all: unset;
@@ -2631,9 +2612,9 @@ CHATGPT USED - ADJUST THIS*/
   cursor: pointer;
   color: #fff;
   background-color: #8FC73B;
-  padding: 0.5rem 1rem; /* smaller padding */
+  padding: 0.5rem 1rem; 
   border-radius: 8px;
-  width: 140px; /* smaller width */
+  width: 140px; 
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   font-weight: 500;
 }
@@ -2645,7 +2626,7 @@ CHATGPT USED - ADJUST THIS*/
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* outlined button variant */
+
 .btn-outline {
   background-color: transparent;
   color: #8FC73B;
