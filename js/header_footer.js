@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(autoSlideshow, 100); 
 });
 
+// load different header for loggen in vs not logged in users
+// referenced from https://www.youtube.com/watch?v=YqUdP0_RbTc
 function loadHeader() {
     fetch("/html/include/header.html")
         .then(res => res.text())
@@ -178,6 +180,10 @@ function autoSlideshow() {
 // ==========================
 // Global Progress Bar Update
 // ==========================
+// progress bar styling and javascript animation was referenced from https://www.w3schools.com/howto/howto_js_progressbar.asp
+// the progress bar code was changed from the reference by connecting it to the login/signup function
+// it was also integrated with the addng points functions so that as user gain points it will reflect on the progress bar
+// the progress/points data is saved locally
 function updateProgressBar() {
     const loggedIn = localStorage.getItem("loggedIn") === "true";
     const notSignedInBar = document.getElementById("not-signedin-progressbar");
@@ -191,7 +197,7 @@ function updateProgressBar() {
         if (signedInBar) signedInBar.style.display = 'none';
         return;
     }
-
+    // display different progress bar for signed in or not signed in user
     if (!notSignedInBar || !signedInBar) return;
 
     if (loggedIn) {
@@ -265,7 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // Signup/Login Popup Logic (NO CHANGES NEEDED)
 // ==========================
 function initPopup() {
-    // ... (Your existing initPopup code here) ...
     const popup = document.getElementById('popupContainer');
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
