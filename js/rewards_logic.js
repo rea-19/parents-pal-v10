@@ -1,6 +1,3 @@
-// confetti reference: https://codepen.io/rewkun/pen/ExMeeBV
-
-
 //AI (ChatGPT) has been used with this code, for the following purposes: 
 // 1. to simplify the code and remove irrelevant code
 // 2. to error-check or correct, or to give advice on where to check for problems
@@ -55,6 +52,8 @@ waitForProgressBar((progress) => {
   // track previous points so we only celebrate when crossing the threshold
   let lastPoints = userPoints;
 
+  // confetti reference: https://codepen.io/rewkun/pen/ExMeeBV
+  // AI Support was used for this function
   // add confetti when goal is reached
   function launchConfetti() {
     try {

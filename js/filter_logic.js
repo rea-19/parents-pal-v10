@@ -41,6 +41,7 @@ $(document).ready(function() {
                     width: $(this).outerWidth() + "px"
                 });
 
+                // javascript library used: http://ionden.com/a/plugins/ion.rangeSlider/skins.html
                 // Initialise cost slider
                 const $slider = $dropdown.find("#cost-slider");
                 if ($slider.length && !$slider.data("ionRangeSlider")) {
@@ -169,6 +170,7 @@ function renderSelectedFilters() {
     }
 }
 
+// Code snippet for fetching API, filtering through are sourced from course practical Week 3, 4, 5
 // global variables and data handling
 let allFetchedRecords = [];
 const originalIterateRecords = window.iterateRecords;
@@ -216,6 +218,7 @@ function rangesOverlap(min1, max1, min2, max2){
     return Math.max(min1, min2) <= Math.min(max1, max2);
 }
 
+// Code snippet for fetching API, filtering through are sourced from course practical Week 3, 4, 5
 // filtering events based on user input
 function filterEvents() {
     if(allFetchedRecords.length === 0) return; 

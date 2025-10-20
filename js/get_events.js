@@ -1,3 +1,5 @@
+// adding event records dynamically
+// Code snippet for manipulating data from API are referenced from course practical Week 4, 5
 function iterateRecords(data) {
     console.log("Data returned: " + JSON.stringify(data));
 
@@ -76,6 +78,7 @@ function iterateRecords(data) {
     });
 }
 
+// Code snippet for fetching API, filtering through are sourced from course practical Week 3, 4, 5
 $(document).ready(function () {
     const apiURLs = [
         "https://data.brisbane.qld.gov.au/api/explore/v2.1/catalog/datasets/infants-and-toddlers-events/records",
@@ -96,23 +99,3 @@ $(document).ready(function () {
     });
 });
 
-
-$(document).ready(function () {
-    const apiURLs = [
-        "https://data.brisbane.qld.gov.au/api/explore/v2.1/catalog/datasets/infants-and-toddlers-events/records",
-        "https://data.brisbane.qld.gov.au/api/explore/v2.1/catalog/datasets/library-events/records"
-    ];
-
-    const requestParams = { limit: 50 };
-    const queryString = new URLSearchParams(requestParams).toString();
-
-    apiURLs.forEach(apiURL => {
-        const fullURL = apiURL + "?" + queryString;
-        console.log("Fetching: " + fullURL);
-
-        fetch(fullURL)
-            .then(response => response.json())
-            .then(data => iterateRecords(data))
-            .catch(error => console.error("Error fetching data from " + apiURL, error));
-    });
-});

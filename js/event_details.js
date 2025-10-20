@@ -31,6 +31,8 @@ function generateFilterMatchItem(iconClass, value, defaultLabel) {
 // ==========================
 // Main Page Load
 // ==========================
+
+// Code snippet for fetching API, filtering through are sourced from course practical Week 3, 4, 5
 $(document).ready(function () {
   const subject = getQueryParam("subject");
   const start = getQueryParam("start");
