@@ -49,8 +49,21 @@ const preGeocodedLocations = {
   // Library Events (example)
   "Garden City Library": [-27.5205, 153.0732],
   "Chermside Library": [-27.4145, 153.0336],
+  "Brisbane Square Library": [-27.470625396194546, 153.02388106519612],
+  "Wynnum Library": [-27.444842597699093, 153.17225409271745],
+  "Annerley Library": [-27.50907108406768, 153.03424875104642],
+  "Svoboda Park, Kuraby": [-27.605330811942043, 153.09853130435903],
+  "Indooroopilly Library": [-27.501126577924424, 152.97272005594172],
+  "Sunnybank Hills Library": [-27.610127737977063, 153.0566373235251],
+  "Carindale Library": [-27.500918856572852, 153.10410697749504],
+  "Toowong Library": [-27.4854046911848, 152.99426424800188],
+  "Mt Gravatt Library": [-27.538158008751573, 153.08250378436225],
 
   // Infants & Toddlers Events (example)
+  "Perrin Park, Toowong": [-27.491531764237564, 152.99212386203067],
+  "Museum of Brisbane, Brisbane City": [-27.468503592804012, 153.02446606573247],
+  "Richard Randall Art Studio, Toowong": [-27.474753552734985, 152.9785945154643],
+  "7th Brigade Park, Chermside": [-27.37905929772551, 153.03915101709947],
   "Little Bayside Park": [-27.4501, 153.1822],
   "New Farm Park": [-27.4567, 153.0465]
 };
@@ -86,24 +99,44 @@ function processEvents(records) {
 function processMarkets(records) {
   records.forEach(record => {
     const f = record.fields || {};
+    const name = f.subject?.trim() || "Unnamed Market";
+    const address = f.location || f.venueaddress || "";
+    const date = f.start_datetime || f.formatteddatetime || "TBA";
+    const description = f.description || "No description available";
+    const cost = f.cost || "Free";
+
+    console.log("Market name:", name, "| Location:", address);
+
     let coords = f.geo_point_2d || (record.geometry?.coordinates ? [...record.geometry.coordinates].reverse() : null);
 
     // Fallback to pre-geocoded
-    if (!coords && f.event_name && preGeocodedLocations[f.event_name]) {
-      coords = preGeocodedLocations[f.event_name];
+    if (!coords && name) {
+      const match = Object.keys(preGeocodedLocations).find(k =>
+        k.toLowerCase() === name.toLowerCase() ||
+        name.toLowerCase().includes(k.toLowerCase()) ||
+        k.toLowerCase().includes(name.toLowerCase())
+      );
+      if (match) {
+        coords = preGeocodedLocations[match];
+        console.log("Matched geocoded location:", match, coords);
+      }
     }
 
-    if (!coords) return; // skip if no coordinates
+    if (!coords) {
+      console.warn("Missing coordinates for market:", name);
+      return;
+    }
 
     const popup = createPopupHTML({
-      name: f.event_name || f.subject || "Market",
-      cost: f.cost || "Free",
-      date: f.start_datetime || f.formatteddatetime || "TBA",
-      address: f.venueaddress || f.location || "Address not available",
-      description: f.description || "No description available"
+      name,
+      cost,
+      date,
+      address,
+      description
     });
 
-    L.marker(coords, { icon: iconMarkets }).bindPopup(popup).addTo(allMarkers.markets);
+    const marker = L.marker(coords, { icon: iconMarkets }).bindPopup(popup);
+    marker.addTo(allMarkers.markets);
   });
 
   console.log("Finished processing markets");
@@ -159,10 +192,13 @@ Promise.all([
   processEvents(toddlers.records);
 }).catch(err => console.error("Events fetch error:", err));
 
-// Markets (local JSON file)
+// Markets 
 fetch("https://data.brisbane.qld.gov.au/api/records/1.0/search/?dataset=markets-events&q=&rows=20")
   .then(res => res.json())
-  .then(data => processMarkets(data))
+  .then(data => {
+    console.log("Markets API response:", data);
+    processMarkets(data.records);
+  })
   .catch(err => console.error("Markets fetch error:", err));
 
 // Parks
