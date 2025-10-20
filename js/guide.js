@@ -1,3 +1,10 @@
+//Reference: https://www.w3schools.com/js/default.asp
+
+/**
+ * AI Generative Tool (Copilot) is use in this file, for the following purposes: 
+ * 1. To explain the accessibility role e.g aria
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
   //Select all FAQ buttons
   const faqButtons = document.querySelectorAll(".faq-question");
