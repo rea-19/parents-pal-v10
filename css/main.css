@@ -2376,6 +2376,26 @@ CHATGPT USED - ADJUST THIS*/
   border-radius: 16px;
 }
 
+/* --- Unified styling for Flip and Wallet buttons --- */
+.wallet-btn,
+.flip-btn {
+  flex: 1; /* equal width when side by side */
+  padding: 0.75rem 1.25rem; /* consistent size */
+  background-color: #8FC73B; /* same as other green buttons */
+  color: #fff; /* white text */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  font-weight: 500;
+}
+
+.wallet-btn:hover,
+.flip-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
 
 
 .info-banner details {
@@ -2420,19 +2440,25 @@ CHATGPT USED - ADJUST THIS*/
   padding-bottom: 2rem;      /* 👈 adds space underneath */
 }
 
-.reward-buttons a {
-  background-color: #8FC73B; /* green background */
-  color: white;              /* white text */
-  text-decoration: none;     /* remove underline */
-  padding: 12px 24px;        /* button-like padding */
-  border-radius: 10px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+/* --- Reset Flip and Wallet buttons --- */
+.wallet-btn,
+.flip-btn {
+  all: unset; /* removes ALL previous styles */
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  color: #fff; /* keep white text */
+  background-color: #8FC73B; /* set new base colour */
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  width: 100px; /* optional, can remove */
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-.reward-buttons a:hover {
-  background-color: #7BB832; /* slightly darker green */
+.wallet-btn:hover,
+.flip-btn:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 /* outlined button variant */
