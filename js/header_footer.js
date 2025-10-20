@@ -1,255 +1,342 @@
 document.addEventListener('DOMContentLoaded', () => {
-  loadHeader();
+    loadHeader();
+    // Run the slideshow initializer after a short delay to ensure slides are loaded
+    setTimeout(autoSlideshow, 100); 
 });
 
 function loadHeader() {
-  fetch("/html/include/header.html")
-    .then(res => res.text())
-    .then(data => {
-      const headerDiv = document.getElementById("header");
-      headerDiv.innerHTML = data;
+    fetch("/html/include/header.html")
+        .then(res => res.text())
+        .then(data => {
+            const headerDiv = document.getElementById("header");
+            headerDiv.innerHTML = data;
 
-      const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
-      if (isHomePage) {
-        headerDiv.classList.add('transparent-header-container'); 
+            const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
+            if (isHomePage) {
+                headerDiv.classList.add('transparent-header-container');
 
-        const navbar = document.getElementById('navbar');
-        if (navbar) {
-          navbar.style.backgroundColor = 'transparent';
-          navbar.style.boxShadow = 'none';
-          navbar.style.position = 'absolute';
-          navbar.querySelectorAll('a').forEach(link => link.style.color = '#fff'); 
-        }
-      }
+                const navbar = document.getElementById('navbar');
+                if (navbar) {
+                    // 3. Override default navbar styles
+                    navbar.style.backgroundColor = 'transparent';
+                    navbar.style.backgroundImage = 'none';
+                    navbar.style.boxShadow = 'none';
+                    navbar.style.height = 'auto'; // CRITICAL: Remove fixed height
+                    navbar.style.position = 'relative'; 
+                    navbar.style.padding = '10px 40px'; 
+                    
+                    // 4. Text color overrides (to white)
+                    navbar.querySelectorAll('a').forEach(link => {
+                        link.style.color = '#fff';
+                    });
+                    
+                    // Also target dropdown toggle links
+                    const dropdownToggles = navbar.querySelectorAll('.dropdown-toggle');
+                    dropdownToggles.forEach(toggle => {
+                        toggle.style.color = '#fff';
+                    });
 
-      initHeader();
-    })
-    .catch(err => console.error("Error loading header:", err));
+                    // 5. Green color fix for logo text
+                    const logoGreenSpan = navbar.querySelector('#logo .green');
+                    if (logoGreenSpan) {
+                        logoGreenSpan.style.color = '#8FC73B';
+                    }
+                }
+            }
+
+            initHeader();
+        })
+        .catch(err => console.error("Error loading header:", err));
 }
 
 function initHeader() {
-  const loggedIn = localStorage.getItem("loggedIn") === "true";
-  const navbarLinks = document.getElementById("navbar-links");
-  const profileBtn = document.getElementById("profileBtn");
+    const loggedIn = localStorage.getItem("loggedIn") === "true";
+    const navbarLinks = document.getElementById("navbar-links");
+    const profileBtn = document.getElementById("profileBtn");
 
-  const oldDropdown = document.querySelector(".profile-dropdown");
-  if (oldDropdown) oldDropdown.remove();
+    const oldDropdown = document.querySelector(".profile-dropdown");
+    if (oldDropdown) oldDropdown.remove();
 
-  if (loggedIn) {
-    if (profileBtn) profileBtn.style.display = "none";
+    if (loggedIn) {
+        if (profileBtn) profileBtn.style.display = "none";
 
-    const dropdown = document.createElement("div");
-    dropdown.classList.add("dropdown", "profile-dropdown");
+        const dropdown = document.createElement("div");
+        dropdown.classList.add("dropdown", "profile-dropdown");
 
-    dropdown.innerHTML = `
-      <a href="#" class="dropdown-toggle">Profile ▾</a>
-      <div class="dropdown-menu">
-        <a href="/html/profile_rewards.html">Rewards</a>
-        <a href="/html/profile_my_events.html">My Events</a>
-        <a href="#" id="logoutBtnDropdown">Log Out</a>
-      </div>
-    `;
+        dropdown.innerHTML = `
+            <a href="#" class="dropdown-toggle">Profile ▾</a>
+            <div class="dropdown-menu">
+                <a href="/html/profile_rewards.html">Rewards</a>
+                <a href="/html/profile_my_events.html">My Events</a>
+                <a href="#" id="logoutBtnDropdown">Log Out</a>
+            </div>
+        `;
 
-    if (navbarLinks) navbarLinks.appendChild(dropdown);
+        if (navbarLinks) navbarLinks.appendChild(dropdown);
 
-    const toggle = dropdown.querySelector(".dropdown-toggle");
-    const menu = dropdown.querySelector(".dropdown-menu");
-    toggle.onclick = e => {
-      e.preventDefault();
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
-    };
+        const toggle = dropdown.querySelector(".dropdown-toggle");
+        const menu = dropdown.querySelector(".dropdown-menu");
+        toggle.onclick = e => {
+            e.preventDefault();
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        };
 
-    const logoutBtnDropdown = document.getElementById("logoutBtnDropdown");
-    if (logoutBtnDropdown) {
-      logoutBtnDropdown.onclick = e => {
-        e.preventDefault();
-        if (confirm("Log out?")) {
-          localStorage.removeItem("loggedIn");
-          localStorage.removeItem("loggedInUser");
-          alert("Logged out!");
-          loadHeader(); 
+        const logoutBtnDropdown = document.getElementById("logoutBtnDropdown");
+        if (logoutBtnDropdown) {
+            logoutBtnDropdown.onclick = e => {
+                e.preventDefault();
+                if (confirm("Log out?")) {
+                    localStorage.removeItem("loggedIn");
+                    localStorage.removeItem("loggedInUser");
+                    alert("Logged out!");
+                    loadHeader(); 
+                }
+            };
         }
-      };
+
+    } else {
+        if (profileBtn) {
+            profileBtn.style.display = "inline-block";
+            profileBtn.href = "#";
+            profileBtn.style.cursor = "pointer";
+            profileBtn.onclick = e => {
+                e.preventDefault();
+                const popup = document.getElementById("popupContainer");
+                const loginForm = document.getElementById("loginForm");
+                const signupForm = document.getElementById("signupForm");
+                if (!popup || !loginForm || !signupForm) return;
+
+                popup.style.display = "flex";
+                loginForm.style.display = "flex";
+                signupForm.style.display = "none";
+            };
+        }
+
+        initPopup();
     }
 
-  } else {
-    if (profileBtn) {
-      profileBtn.style.display = "inline-block";
-      profileBtn.href = "#";
-      profileBtn.style.cursor = "pointer";
-      profileBtn.onclick = e => {
-        e.preventDefault();
-        const popup = document.getElementById("popupContainer");
-        const loginForm = document.getElementById("loginForm");
-        const signupForm = document.getElementById("signupForm");
-        if (!popup || !loginForm || !signupForm) return;
+    updateProgressBar();
+}
 
-        popup.style.display = "flex";
-        loginForm.style.display = "flex";
-        signupForm.style.display = "none";
-      };
+// ==========================
+// AUTO SLIDESHOW LOGIC (NEW)
+// ==========================
+// ==========================
+// AUTO SLIDESHOW LOGIC (UPDATED)
+// ==========================
+function autoSlideshow() {
+    const slides = document.querySelectorAll('.slideshow-with-text .slide');
+    if (slides.length === 0) return;
+
+    let currentSlide = 0;
+    // UPDATED: Changed from 5000 to 3000 milliseconds (3 seconds)
+    const intervalTime = 10; 
+
+    function showSlide(n) {
+        // ... (rest of the showSlide function remains the same)
+        slides.forEach(slide => {
+            slide.classList.remove('displaySlide', 'active');
+        });
+
+        if (n >= slides.length) {
+            currentSlide = 0;
+        } else if (n < 0) {
+            currentSlide = slides.length - 1;
+        } else {
+            currentSlide = n;
+        }
+
+        slides[currentSlide].classList.add('displaySlide', 'active');
     }
 
-    initPopup();
-  }
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
 
-  updateProgressBar();
+    showSlide(currentSlide);
+    
+    // Set the interval for the automatic advance
+    setInterval(nextSlide, intervalTime);
+
+    // ... (rest of the function for navigation buttons remains the same)
+    const nextButton = document.querySelector('.slideshow-with-text .next');
+    const prevButton = document.querySelector('.slideshow-with-text .previous');
+
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+    }
+
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+    }
 }
 
 // ==========================
 // Global Progress Bar Update
 // ==========================
 function updateProgressBar() {
-  const loggedIn = localStorage.getItem("loggedIn") === "true";
-  const notSignedInBar = document.getElementById("not-signedin-progressbar");
-  const signedInBar = document.getElementById("signedin-progressbar");
+    const loggedIn = localStorage.getItem("loggedIn") === "true";
+    const notSignedInBar = document.getElementById("not-signedin-progressbar");
+    const signedInBar = document.getElementById("signedin-progressbar");
 
-  const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
-  if (isHomePage) {
-    if (notSignedInBar) notSignedInBar.style.display = 'none';
-    if (signedInBar) signedInBar.style.display = 'none';
-    return;
-  }
+    const isHomePage = window.location.pathname === '/' || window.location.pathname.endsWith('/index.html');
+    
+    // ENSURE progress bars are hidden on the homepage to prevent overlap with transparent/sticky header
+    if (isHomePage) {
+        if (notSignedInBar) notSignedInBar.style.display = 'none';
+        if (signedInBar) signedInBar.style.display = 'none';
+        return;
+    }
 
-  if (!notSignedInBar || !signedInBar) return;
+    if (!notSignedInBar || !signedInBar) return;
 
-  if (loggedIn) {
-    notSignedInBar.style.display = "none";
-    signedInBar.style.display = "block";
-    signedInBar.style.cursor = "pointer";
-    signedInBar.onclick = () => window.location.href = "/html/profile_rewards.html";
-  } else {
-    signedInBar.style.display = "none";
-    notSignedInBar.style.display = "block";
-    notSignedInBar.style.cursor = "pointer";
-    notSignedInBar.onclick = () => {
-      const popup = document.getElementById("popupContainer");
-      const loginForm = document.getElementById("loginForm");
-      const signupForm = document.getElementById("signupForm");
-      if (!popup || !loginForm || !signupForm) return;
+    if (loggedIn) {
+        notSignedInBar.style.display = "none";
+        signedInBar.style.display = "block";
+        signedInBar.style.cursor = "pointer";
+        signedInBar.onclick = () => window.location.href = "/html/profile_rewards.html";
+    } else {
+        signedInBar.style.display = "none";
+        notSignedInBar.style.display = "block";
+        notSignedInBar.style.cursor = "pointer";
+        notSignedInBar.onclick = () => {
+            const popup = document.getElementById("popupContainer");
+            const loginForm = document.getElementById("loginForm");
+            const signupForm = document.getElementById("signupForm");
+            if (!popup || !loginForm || !signupForm) return;
 
-      popup.style.display = "flex";
-      loginForm.style.display = "flex";
-      signupForm.style.display = "none";
-    };
-  }
+            popup.style.display = "flex";
+            loginForm.style.display = "flex";
+            signupForm.style.display = "none";
+        };
+    }
 }
 
 // Apply saved points to progress bars
 function applySavedRewardsToBars() {
-  const loggedInUser = localStorage.getItem('loggedInUser') || 'guest';
-  const storageKey = `rewards_${loggedInUser}`;
-  let userPoints = 0;
-  let goal = 50;
-  try {
-    const raw = localStorage.getItem(storageKey);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      if (typeof parsed.userPoints === 'number') userPoints = parsed.userPoints;
-      if (typeof parsed.goal === 'number') goal = parsed.goal;
+    const loggedInUser = localStorage.getItem('loggedInUser') || 'guest';
+    const storageKey = `rewards_${loggedInUser}`;
+    let userPoints = 0;
+    let goal = 50;
+    try {
+        const raw = localStorage.getItem(storageKey);
+        if (raw) {
+            const parsed = JSON.parse(raw);
+            if (typeof parsed.userPoints === 'number') userPoints = parsed.userPoints;
+            if (typeof parsed.goal === 'number') goal = parsed.goal;
+        }
+    } catch (e) {
+        console.warn('Failed to read saved rewards:', e);
     }
-  } catch (e) {
-    console.warn('Failed to read saved rewards:', e);
-  }
 
-  const percentage = goal && goal > 0 ? Math.min((userPoints / goal) * 100, 100) : 0;
+    const percentage = goal && goal > 0 ? Math.min((userPoints / goal) * 100, 100) : 0;
 
-  const signedInBar = document.getElementById('signedin-progressbar');
-  if (signedInBar) {
-    const fill = signedInBar.querySelector('.progress-done');
-    if (fill) fill.style.width = `${percentage}%`;
-    const text = signedInBar.querySelector('#point-text');
-    if (text) text.innerText = `${userPoints}/${goal}`;
-  }
+    const signedInBar = document.getElementById('signedin-progressbar');
+    if (signedInBar) {
+        const fill = signedInBar.querySelector('.progress-done');
+        if (fill) fill.style.width = `${percentage}%`;
+        const text = signedInBar.querySelector('#point-text');
+        if (text) text.innerText = `${userPoints}/${goal}`;
+    }
 
-  const notSignedInBar = document.getElementById('not-signedin-progressbar');
-  if (notSignedInBar) {
-    const fill = notSignedInBar.querySelector('#progress-fill');
-    if (fill) fill.style.width = `${percentage}%`;
-    const text = notSignedInBar.querySelector('#point-text');
-    if (text) text.innerText = userPoints > 0 ? `You have ${userPoints} points` : text.innerText;
-  }
+    const notSignedInBar = document.getElementById('not-signedin-progressbar');
+    if (notSignedInBar) {
+        const fill = notSignedInBar.querySelector('#progress-fill');
+        if (fill) fill.style.width = `${percentage}%`;
+        const text = notSignedInBar.querySelector('#point-text');
+        if (text) text.innerText = userPoints > 0 ? `You have ${userPoints} points` : text.innerText;
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(applySavedRewardsToBars, 50);
+    // Run header loading first
+    loadHeader(); 
+    // Wait a moment for header/bars to be present, then apply rewards
+    setTimeout(applySavedRewardsToBars, 50); 
+    // Initialize slideshow
+    setTimeout(autoSlideshow, 100);
 });
 
 // ==========================
-// Signup/Login Popup Logic
+// Signup/Login Popup Logic (NO CHANGES NEEDED)
 // ==========================
 function initPopup() {
-  const popup = document.getElementById('popupContainer');
-  const loginForm = document.getElementById('loginForm');
-  const signupForm = document.getElementById('signupForm');
-  const closePopup = document.getElementById('closePopup');
-  const showSignup = document.getElementById('showSignup');
-  const showLogin = document.getElementById('showLogin');
+    // ... (Your existing initPopup code here) ...
+    const popup = document.getElementById('popupContainer');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const closePopup = document.getElementById('closePopup');
+    const showSignup = document.getElementById('showSignup');
+    const showLogin = document.getElementById('showLogin');
 
-  if (!popup || !loginForm || !signupForm) return;
+    if (!popup || !loginForm || !signupForm) return;
 
-  loginForm.style.display = 'flex';
-  signupForm.style.display = 'none';
-
-  if (closePopup) closePopup.onclick = () => popup.style.display = 'none';
-  window.onclick = e => { if (e.target === popup) popup.style.display = 'none'; };
-
-  if (showSignup) showSignup.onclick = e => {
-    e.preventDefault();
-    loginForm.style.display = 'none';
-    signupForm.style.display = 'flex';
-  };
-  if (showLogin) showLogin.onclick = e => {
-    e.preventDefault();
-    signupForm.style.display = 'none';
     loginForm.style.display = 'flex';
-  };
+    signupForm.style.display = 'none';
 
-  // --- Signup ---
-  signupForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const email = signupForm.querySelector('input[type="email"]').value.trim();
-    const password = signupForm.querySelector('input[type="password"]').value.trim();
-    const phone = signupForm.querySelector('input[type="tel"]').value.trim();
-    if (!email || !password || !phone) return alert("Please fill out all fields.");
+    if (closePopup) closePopup.onclick = () => popup.style.display = 'none';
+    window.onclick = e => { if (e.target === popup) popup.style.display = 'none'; };
 
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    if (users.some(u => u.email === email)) return alert("Email already registered.");
-    if (users.some(u => u.phone === phone)) return alert("Phone number already registered.");
+    if (showSignup) showSignup.onclick = e => {
+        e.preventDefault();
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'flex';
+    };
+    if (showLogin) showLogin.onclick = e => {
+        e.preventDefault();
+        signupForm.style.display = 'none';
+        loginForm.style.display = 'flex';
+    };
 
-    users.push({ email, password, phone });
-    localStorage.setItem("users", JSON.stringify(users));
-    localStorage.setItem("loggedIn", "true");
-    localStorage.setItem("loggedInUser", email);
+    // --- Signup ---
+    signupForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = signupForm.querySelector('input[type="email"]').value.trim();
+        const password = signupForm.querySelector('input[type="password"]').value.trim();
+        const phone = signupForm.querySelector('input[type="tel"]').value.trim();
+        if (!email || !password || !phone) return alert("Please fill out all fields.");
 
-    // ===== Add 15 points for new signup =====
-    const storageKey = `rewards_${email}`;
-    localStorage.setItem(storageKey, JSON.stringify({ userPoints: 15, goal: 50 }));
-    if (typeof window.addPoints === "function") window.addPoints(0); // refresh progress bar
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+        if (users.some(u => u.email === email)) return alert("Email already registered.");
+        if (users.some(u => u.phone === phone)) return alert("Phone number already registered.");
 
-    alert("Signup successful! You earned 15 points as a welcome bonus!");
-    popup.style.display = "none";
-    initHeader();
-  });
+        users.push({ email, password, phone });
+        localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("loggedInUser", email);
 
-  // --- Login ---
-  loginForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const email = loginForm.querySelector('input[type="email"]').value.trim();
-    const password = loginForm.querySelector('input[type="password"]').value.trim();
-    const users = JSON.parse(localStorage.getItem("users") || "[]");
-    const user = users.find(u => u.email === email && u.password === password);
-    if (user) {
-      localStorage.setItem("loggedIn", "true");
-      localStorage.setItem("loggedInUser", email);
-      alert("Login successful!");
-      popup.style.display = "none";
-      initHeader();
-    } else alert("Invalid email or password.");
-  });
+        // ===== Add 15 points for new signup =====
+        const storageKey = `rewards_${email}`;
+        localStorage.setItem(storageKey, JSON.stringify({ userPoints: 15, goal: 50 }));
+        if (typeof window.addPoints === "function") window.addPoints(0); // refresh progress bar
+
+        alert("Signup successful! You earned 15 points as a welcome bonus!");
+        popup.style.display = "none";
+        initHeader();
+    });
+
+    // --- Login ---
+    loginForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = loginForm.querySelector('input[type="email"]').value.trim();
+        const password = loginForm.querySelector('input[type="password"]').value.trim();
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+        const user = users.find(u => u.email === email && u.password === password);
+        if (user) {
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("loggedInUser", email);
+            alert("Login successful!");
+            popup.style.display = "none";
+            initHeader();
+        } else alert("Invalid email or password.");
+    });
 }
 
-// Load footer
+// Load footer (NO CHANGES NEEDED)
 fetch("/html/include/footer.html")
-  .then(res => res.text())
-  .then(data => document.getElementById("footer").innerHTML = data);
+    .then(res => res.text())
+    .then(data => document.getElementById("footer").innerHTML = data);

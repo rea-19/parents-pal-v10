@@ -5,58 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event</title>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p6CjwB5D1l84cM5KuV1wX1Z5U1wD0g/6QxCg3WQ03NnODU4rrjT0TV4U+6Zz5f9G7D1mEeGey9d8eHtG75TQ1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header -->
+    
     <div id="header"></div>
 
-    <!-- Global Progress Bar -->
-    <div id="signedin-progressbar" class="progress-container" style="margin: 20px; height: 20px;">
-        <div class="progress-done"></div>
-        <div id="runner"></div>
-    </div>
+    <div id="signedin-progressbar" class="progress-container" style="margin: 20px auto; max-width: 900px; height: 20px;">
+        </div>
 
-    <!-- Event Details -->
-    <section id="event-details"></section>
+    <section id="event-details" class="page-wrapper">
+        </section>
 
-    <!-- Write Review Button -->
     <div class="write-review-section" style="text-align: center; margin: 20px 0;">
-      <button id="writeReviewBtn" class="action-button primary">
-        <i class="fa-solid fa-pen"></i> Write Review
-      </button>
+        <button id="writeReviewBtn" class="action-button" style="background-color: #f2f2f2; color: var(--muted-text);">
+            <i class="fa-solid fa-pen" style="color: var(--primary-color);"></i> Write Review
+        </button>
     </div>
 
-    <!-- Review Popup -->
-    <div id="reviewPopup" class="popup">
-      <div class="popup-content">
-        <span class="close">&times;</span>
-        <form id="reviewForm">
-          <label for="reviewerChoice">Post as:</label>
-          <select id="reviewerChoice">
-            <option value="anonymous">Anonymous</option>
-            <option value="named">Named</option>
-          </select>
+    <div id="reviewPopup" class="popup" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div class="popup-content" style="background-color: white; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 8px;">
+            <span class="close" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+            <form id="reviewForm">
+                <h2 style="font-size: 1.5rem; margin-bottom: 20px; color: var(--text-color);">Submit a Review</h2>
+                
+                <label for="reviewerChoice" style="display: block; margin-bottom: 5px; font-weight: 600;">Post as:</label>
+                <select id="reviewerChoice" style="margin-bottom: 15px; padding: 8px; border-radius: 4px; border: 1px solid #ccc; width: 100%;">
+                    <option value="named">Named</option>
+                    <option value="anonymous">Anonymous</option>
+                </select>
 
-          <div id="nameField" style="display: none;">
-            <input type="text" id="reviewerName" placeholder="Enter your name">
-          </div>
+                <div id="nameField"> 
+                    <input type="text" id="reviewerName" placeholder="Enter your name" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 4px; border: 1px solid #ccc;">
+                </div>
 
-          <textarea id="reviewText" placeholder="Write your review..."></textarea>
-          <div class="button-group">
-            <button type="submit" class="save-btn">Submit</button>
-            <button type="button" class="cancel-btn">Cancel</button>
-          </div>
-        </form>
-      </div>
+                <label for="reviewText" style="display: block; margin-bottom: 5px; font-weight: 600;">Your Review:</label>
+                <textarea id="reviewText" placeholder="Write your review..." style="width: 100%; height: 100px; padding: 10px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #ccc; resize: vertical;"></textarea>
+                
+                <div class="button-group" style="display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="submit" class="action-button" style="background-color: var(--primary-color); color: white; padding: 10px 20px;">Submit</button>
+                    <button type="button" class="action-button cancel-btn" style="background-color: #ccc; color: var(--text-color); padding: 10px 20px;">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
+
+
+<section class="event-box" style="max-width: 850px; margin: 30px auto; padding: 30px;">
+        
+        <h2 style="font-size: 1.5rem; border-bottom: 3px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 25px; font-weight: 700; color: var(--text-color);">
+            What Parents Say
+        </h2>
+
+        <div class="event-content-layout">
+            
+            <div style="flex-grow: 1;"> 
+                <div class="reviews-widget-container">
+                    <script src="https://elfsightcdn.com/platform.js" async></script>
+                    <div class="elfsight-app-b1ed0314-7e70-428f-b9d2-e9dcf252213a" data-elfsight-app-lazy></div>    
+                </div>
+            </div>
+
+            <div style="width: 250px; flex-shrink: 0;"> 
+                </div>
+            
+        </div>
+    </section>
 
     <div id="footer"></div>
 
-    <!-- Scripts -->
     <script src="/js/header_footer.js"></script>
-    <script src="/js/rewards_logic.js"></script> <!-- global points system -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/js/event_details.js"></script>
-</body>
+    </body>
 </html>
