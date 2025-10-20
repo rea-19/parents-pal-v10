@@ -2450,17 +2450,19 @@ CHATGPT USED - ADJUST THIS*/
 /* --- Reset Flip and Wallet buttons --- */
 .wallet-btn,
 .flip-btn {
-  all: unset; /* removes ALL previous styles */
+  all: unset;
   display: inline-block;
   text-align: center;
   cursor: pointer;
-  color: #fff; /* keep white text */
-  background-color: #8FC73B; /* set new base colour */
-  padding: 0.5rem 1rem;
-  border-radius: 100px;
-  width: 100px; /* optional, can remove */
+  color: #fff;
+  background-color: #8FC73B;
+  padding: 0.5rem 1rem; /* smaller padding */
+  border-radius: 8px;
+  width: 140px; /* smaller width */
   transition: transform 0.2s ease, box-shadow 0.3s ease;
+  font-weight: 500;
 }
+
 
 .wallet-btn:hover,
 .flip-btn:hover {
