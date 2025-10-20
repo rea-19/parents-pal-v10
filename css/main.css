@@ -2569,86 +2569,138 @@ CHATGPT USED - ADJUST THIS*/
 }
 
 /* Make slideshow images cover entire slider */
+/* =================================================== */
+/* SLIDESHOW FULL-SCREEN HEIGHT CORRECTION             */
+/* =================================================== */
+
+/* =================================================== */
+/* SLIDESHOW FULL-SCREEN AND TEXT VISIBILITY FIX       */
+/* =================================================== */
+
+.slide {
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+/* Make slideshow images cover entire slider */
 .slideshow-with-text .slides {
-  position: relative;
-  width: 100%;
-  height: 600px;
-  overflow: hidden;
+    position: relative;
+    width: 100%;
+    /* CRITICAL FIX: Use 100vh for full viewport height */
+    height: 100vh;
+    overflow: hidden;
 }
 
 .slideshow-with-text .slide {
-  width: 100%;
-  height: 600px;
-  object-fit: cover;
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+    width: 100%;
+    /* CRITICAL FIX: Use 100vh for full viewport height */
+    height: 100vh;
+    object-fit: cover;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 .slideshow-with-text .displaySlide {
-  display: block;
+    display: block;
 }
 
-/* Add semi-transparent black overlay behind the text */
+/* Add semi-transparent black overlay for the entire slide */
 .slideshow-with-text::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45); /* black with opacity */
-  z-index: 2;
-  pointer-events: none; /* so buttons are still clickable */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Ensure the overlay covers the new full height */
+    height: 100%; 
+    background: rgba(0, 0, 0, 0.45); /* black with opacity */
+    z-index: 2;
+    pointer-events: none;
 }
 
 /* Position the existing .our-story on top of overlay */
 .slideshow-with-text .our-story {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  text-align: center;
-  color: #fff;
-  max-width: 700px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    text-align: center;
+    color: #fff;
+    max-width: 700px;
+    
+    /* NEW: Add black opaque box behind the text */
+    background-color: rgba(0, 0, 0, 0.7); /* Black with 70% opacity */
+    padding: 20px 30px; /* Space around the text */
+    border-radius: 8px; /* Slightly rounded corners */
+}
+
+/* Our Story text styling */
+.slideshow-with-text .our-story h2 {
+    font-size: 3.5em; /* Adjust size to match image */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.slideshow-with-text .our-story h2 .green {
+    color: #8FC73B;
+}
+
+.slideshow-with-text .our-story p {
+    font-size: 1.1em;
+    margin-bottom: 25px;
 }
 
 /* modern button styling */
 .slideshow-with-text .browse-events-button {
-  background-color: #00a651;
-  color: #fff;
-  padding: 12px 25px;
-  border-radius: 8px;
-  font-weight: bold;
-  text-decoration: none;
-  margin-top: 20px;
-  display: inline-block;
+    background-color: #8FC73B; /* Use main brand green */
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 10px; /* Reduced gap */
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.slideshow-with-text .browse-events-button:hover {
+    background-color: #7BB832;
 }
 
 /* Navigation arrows above overlay */
 .slideshow-with-text .next,
 .slideshow-with-text .previous {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 4;
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  border: none;
-  font-size: 30px;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    background: rgba(0, 0, 0, 0.205);
+    color: #fff;
+    border: none;
+    font-size: 30px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
 }
 
 .slideshow-with-text .next { right: 20px; }
 .slideshow-with-text .previous { left: 20px; }
 
+/* =================================================== */
+/* REWARDS SECTION STYLES */
+/* =================================================== */
 
-
+.user-journey-section {
+    padding: 30px 0; /* Add padding above and below */
+    text-align: center;
+}
 
 
 
