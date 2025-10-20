@@ -1,3 +1,10 @@
+/**
+ * AI Generative Tool (Copilot) is use in this file, for the following purposes: 
+ * 1. How to handle the button clicks
+ * 2. How to parse coordinate correctly 
+ * 3. How to debug steps, including logging and fallback geocoding
+ */
+
 // ------------------- MAP INITIALIZATION -------------------
 const map = L.map("map").setView([-27.47, 153.03], 11);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
