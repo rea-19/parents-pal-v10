@@ -1030,27 +1030,29 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 8px var(--text-color);
     z-index: 1000;
-    width: 250px;
-    height: 750px;
-}
-
-/*Box for input*/
-#suburbInput {
-    display: block;
-    max-width: 300px;         
-    margin-bottom: 1.5rem;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    text-align: center;   
-    border-radius: 8px;
-    border: 2px solid var(--muted-text);
+    width: 200px;
+    height: 250px;
+    margin-bottom: 12px;
+    
+    display: flex;
+    flex-direction: column;      
+    flex-wrap: nowrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
 }
 
 /*Container for button filter*/
 .filter-button {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
+
+    width: 100%;
+    max-width: 200px;
+    height: 50px;
+
     padding: 0.6rem 1rem;
     border: 2px solid var(--accent-green);
     background-color: var(--background-color);
@@ -1058,6 +1060,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+    box-sizing: border-box;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -1236,6 +1239,8 @@ body {
 .video {
     width: 320;
     height: 240;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Rewards Section */
