@@ -163,8 +163,6 @@ waitForProgressBar((progress) => {
     }
   // always animate from zero -> percentage 
   setFillWidth(true);
-    progress.innerText = `${userPoints}/${goal}`;
-
     // move runner relative to the progress fill's parent container
     const runner = progress.parentElement.querySelector("#runner");
     if (runner) {

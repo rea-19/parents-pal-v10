@@ -246,9 +246,9 @@ function applySavedRewardsToBars() {
     const notSignedInBar = document.getElementById('not-signedin-progressbar');
     if (notSignedInBar) {
         const fill = notSignedInBar.querySelector('#progress-fill');
-        if (fill) fill.style.width = `${percentage}%`;
+        if (fill) fill.style.width = `70%`;
         const text = notSignedInBar.querySelector('#point-text');
-        if (text) text.innerText = userPoints > 0 ? `You have ${userPoints} points` : text.innerText;
+        if (text) text.innerText = userPoints > 0 ? `Sign in to redeem discounts` : text.innerText;
     }
 }
 
