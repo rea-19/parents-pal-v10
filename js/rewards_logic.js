@@ -4,6 +4,7 @@
 //AI (ChatGPT) has been used with this code, for the following purposes: 
 // 1. to simplify the code and remove irrelevant code
 // 2. to error-check or correct, or to give advice on where to check for problems
+// 3. to add base comments to explain what I'm doing. 
 // All base code is done by hand. AI changes have been changed and edited and have been used to improve, not to do the code itself. 
 
 // wait for the class "progress-done" to load in the DOM
@@ -162,8 +163,6 @@ waitForProgressBar((progress) => {
     }
   // always animate from zero -> percentage 
   setFillWidth(true);
-    progress.innerText = `${userPoints}/${goal}`;
-
     // move runner relative to the progress fill's parent container
     const runner = progress.parentElement.querySelector("#runner");
     if (runner) {
@@ -233,6 +232,7 @@ waitForProgressBar((progress) => {
     });
   }
 
+  // INITIALIZE
   updateProgressBar();
 });
 
