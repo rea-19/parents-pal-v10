@@ -79,7 +79,7 @@ function processEvents(records) {
     L.marker(coords, { icon: iconEvents }).bindPopup(popup).addTo(allMarkers.events);
   });
 
-  console.log("✅ Finished processing events");
+  console.log("Finished processing events");
 }
 
 // ------------------- PROCESS MARKETS -------------------
@@ -106,7 +106,7 @@ function processMarkets(records) {
     L.marker(coords, { icon: iconMarkets }).bindPopup(popup).addTo(allMarkers.markets);
   });
 
-  console.log("✅ Finished processing markets");
+  console.log("Finished processing markets");
 }
 
 // ------------------- PROCESS PARKS -------------------
@@ -135,7 +135,13 @@ function processToilets(records) {
     const popup = `
       <div class="popup-card">
         <span class="popup-title">${f.name || "Toilet"}</span><br>
-        <strong>Address:</strong> ${f.address || ""}
+        <div class="popup-meta">
+          <div><strong>Facility Type:</strong> ${f.facilityType || "Unknown Type"}</div>
+          <div><strong>Address:</strong> ${f.address || "No address provided"}</div>
+          <div><strong>${f.babyChange === "Yes" ? "✅ Baby Change Available" : "❌ No Baby Change"}</strong></div>
+          <div><strong>${f.babyCareRoom === "Yes" ? "✅ Baby Care Room Available" : "❌ No Baby Care Room"}</strong></div>
+          <div><strong>Opening Hours:</strong> ${f.openingHours ||  "Opening hours not listed"}</div>
+        </div>
       </div>
     `;
     L.marker([f.latitude, f.longitude], { icon: iconToilet }).bindPopup(popup).addTo(allMarkers.toilet);
@@ -154,7 +160,7 @@ Promise.all([
 }).catch(err => console.error("Events fetch error:", err));
 
 // Markets (local JSON file)
-fetch("brisbane-city-council-events-locations.json")
+fetch("https://data.brisbane.qld.gov.au/api/records/1.0/search/?dataset=markets-events&q=&rows=20")
   .then(res => res.json())
   .then(data => processMarkets(data))
   .catch(err => console.error("Markets fetch error:", err));

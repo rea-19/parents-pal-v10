@@ -36,7 +36,7 @@ body {
     background-color: #252525;
 }
 
-/* Hnavigation bar */
+/* Header and navigation bar */
 #navbar {
     position: relative; 
     display: flex;
@@ -61,6 +61,7 @@ body {
     cursor: pointer;
 }
 
+/* LINKS CONTAINER */
 #navbar-links {
     display: flex;
     align-items: center;
@@ -90,6 +91,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
+    /* background-color: rgba(143, 199, 59, 0.6); */
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     transition: opacity 0.3s;
@@ -233,7 +235,9 @@ body {
     pointer-events: none;
 }
 
-/* runner image */
+/* runner icon */
+/* runner: center horizontally on the left percentage using translate(-50%, -50%)
+   so setting left to X% will place the runner centered at that point */
 #runner {
     position: absolute;
     top: 50%;
@@ -280,7 +284,7 @@ body {
 
 
 
-/* Bbrowse events */
+/* Browse Events */
 #records {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -288,14 +292,14 @@ body {
     padding: 20px;
 }
 
-
+/* make it 1 column on smaller screens */
 @media (max-width: 768px) {
     #records {
         grid-template-columns: 1fr;
     }
 }
 
-/* events boxes/records */
+
 .record {
     position: relative;
     border-radius: 20px;
@@ -374,13 +378,13 @@ body {
     color: #f0f0f0;
 }
 
-/* when user hovers on points tags, it shows info */
 #points {
     position: relative;
     cursor: help;
     background-color: rgba(255, 185, 22, 0.8);
 }
 
+/* Tooltip hidden by default */
 #points .tooltip {
     visibility: hidden;
     opacity: 0;
@@ -432,7 +436,8 @@ body {
     transform: translate(-50%, 0);
 }
 
-/* filters events in browse events page */
+
+
 #filter-container {
     top: 60px; 
     z-index: 950; 
@@ -480,7 +485,7 @@ body {
 }
 
 
-/* selected filters/tags goes at the bottom of filters*/
+/* selected filters */
 
 #selected-filters {
     margin-top: 8px;
@@ -518,7 +523,7 @@ body {
     line-height: 1;
 }
 
-/* save filters button */
+/* Save Filters Button */
 #save-filters-box {
     display: flex;
     align-items: center;
@@ -544,7 +549,7 @@ body {
     border-color: #6aa53f;
 }
 
-/* dropdown element floating above instead of taking space */
+/* dropdown element floating above */
 .dropdown-floating {
     position: absolute;
     z-index: 9999;
@@ -612,7 +617,7 @@ body {
     margin: 0;
 }
 
-/* book now button */
+/* PRIMARY Button (Book Now) - Green Gradient */
 #book-now-btn {
     /* Uses a linear gradient for the soft look */
     background: linear-gradient(to bottom, var(--primary-color) 0%, #7ab42e 100%);
@@ -624,10 +629,11 @@ body {
     box-shadow: 0 6px 15px rgba(143, 199, 59, 0.6);
 }
 
-/* Save Event, Copy Address button */
+/* SECONDARY/TERTIARY Buttons (Save Event, Copy Address) - Lighter, more subtle */
 #save-event-btn, #copy-address-btn {
+    /* Use a light background for a secondary feel */
     background-color: #f2f2f2;
-    color: var(--muted-text);
+    color: var(--muted-text); /* Use dark text */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -636,13 +642,13 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Icon colours inside the secondary buttons */
+/* Icon colors inside the secondary buttons */
 #save-event-btn i, #copy-address-btn i {
     color: var(--muted-text);
     margin-right: 8px;
 }
 
-/* Icon colour inside the primary button */
+/* Icon color inside the primary button */
 #book-now-btn i {
     color: var(--text-light);
     margin-right: 8px;
@@ -664,9 +670,22 @@ body {
     background-color: #43a047;
 }
 
-/* profile and rewads */
+/* profile and rewards */
+.card-section {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
 
-
+.membership-card {
+    background: var(--background-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    position: relative;
+    width: 350px;
+    text-align: center;
+    color: var(--text-color);
+}
 
 .points-badge {
     position: absolute;
@@ -678,24 +697,268 @@ body {
     font-weight: bold;
 }
 
+.wallet-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.wallet-btn:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+/* back side flipped */
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* flipping animation */
+.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Buttons below card */
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.wallet-btn,
+.flip-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--button-background, #7ab42e);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.wallet-btn:hover,
+.flip-btn:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+
+.rewards {
+    text-align: center;
+    padding: 2rem;
+}
+
+.rewards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/*delete soon*/
+.rewards {
+  text-align: center;
+  padding: 2rem;
+}
+
+.rewards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Individual card container */
+.reward-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 360px; /* roughly phone width */
+  max-width: 100%;
+}
+
+/* Flex layout for image + side label */
+.reward-content {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  background: white;
+}
+
+/* The main reward image */
+.reward-img {
+  width: 85%;
+  height: auto;
+  display: block;
+}
+
+/* The right column text (“SET GOAL” or “CURRENT GOAL”) */
+.reward-side {
+  width: 15%;
+  background: #fff;
+  color: #D6A300; /* gold color */
+  font-weight: bold;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-align: center;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Current goal highlight */
+.current-side {
+  background: #D6A300;
+  color: white;
+}
+
 /* Button section below each card */
 .reward-button {
   margin-top: 0.5rem;
 }
 
+.goal-btn {
+  background: #8FC73B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.goal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Responsive stacking on mobile */
+@media (max-width: 480px) {
+  .rewards-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reward-card {
+    width: 90%;
+  }
+}
+
 /*undelete*/
 
 
+/* Each reward card box */
+.reward-card {
+  width: 200px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--background-color);
+}
+
+/* Hover effect to lift slightly */
+.reward-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(143, 199, 59, 0.25); 
+}
+
+/* Buttons inside the reward cards */
+.goal-btn {
+  background-color: #8FC73B;  
+  color: white;
+  border: none;              
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
 /* Membership Card Interactivity */
 
+/* Card animation container */
+.membership-card {
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Expand and glow on click */
+.membership-card:active {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #7ab42e(255, 215, 0, 0.7);
+}
+
+/* Inner rotating card */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 220px; 
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  border-radius: 16px;
+  overflow: visible; 
+}
+
+/* The actual front and back faces */
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+/* When flipped */
+.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Buttons layout */
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+     margin-top: 1rem;
+}
 
 
+/* Expand and glow only around the card image */
+.membership-card:active .card-face img {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #7ab42e(255, 215, 0, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
 
+/* Reset glow when not pressed */
+.card-face img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px;
+}
 
 /* map section */
-/* Rewads Section Steps (How To) */
+/* Rewards Section Steps (How To) */
 .rewards-row {
     display: flex;
     justify-content: space-between;
@@ -735,7 +998,7 @@ body {
     color: #555;
 }
 
-/* map on map page */
+/* MAP SECTION ON MAP PAGE */
 #map-container {
     height: 100vh;
     width: 100%;
@@ -757,7 +1020,7 @@ body {
     border-radius: 8px;
 }
 
-/*buttons container*/
+/*Buttons container*/
 #controls {
     position: absolute;
     top: 8rem;
@@ -768,20 +1031,14 @@ body {
     box-shadow: 0 2px 8px var(--text-color);
     z-index: 1000;
     width: 250px;
-    height: 750px;
+    height: 300px;
+
+    display: flex;             
+    flex-direction: column;     
+    gap: 2rem;
+    flex-wrap: nowrap; 
 }
 
-/*Box for input*/
-#suburbInput {
-    display: block;
-    max-width: 300px;         
-    margin-bottom: 1.5rem;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    text-align: center;   
-    border-radius: 8px;
-    border: 2px solid var(--muted-text);
-}
 
 /*Container for button filter*/
 .filter-button {
@@ -798,6 +1055,7 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/*When button is clicked*/
 .filter-button.active {
     background-color: var(--accent-green);
     color: var(--text-light);
@@ -915,6 +1173,7 @@ body {
     outline-offset: 2px;
 }
 
+/* When clicked (expanded) */
 .faq-question[aria-expanded="true"] {
     background-color: var(--accent-green);
     color: var(--background-color);
@@ -929,32 +1188,13 @@ body {
 }
 
 .faq-answer {
-  padding: 1.5rem;
-  background-color: var(--background-color);
-  width: 70%;
-  margin: 0 auto;
-  border-radius: 0 0 8px 8px;
-  border-top: 1px solid var(--accent-green);
-  animation: fadeIn 0.3s ease;
-  text-align: center; /* centers video nicely */
-}
-
-.video-container {
-  position: relative;
-  width: 80%;
-  max-width: 720px;
-  margin: 1rem auto;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
-}
-
-.video {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  cursor: pointer;
+    padding: 1rem 1.5rem;
+    background-color: var(--background-color);
+    width: 70%;
+    margin: 0 auto;
+    border-radius: 0 0 8px 8px;
+    border-top: 1px solid var(--accent-green);
+    animation: fadeIn 0.3s ease;
 }
 
 .faq-content {
@@ -987,8 +1227,12 @@ body {
   border-radius: 8px;
 }
 
+.video {
+    width: 320;
+    height: 240;
+}
 
-/* Rewrds Section */
+/* Rewards Section */
 .rewards-row {
     display: flex;
     justify-content: space-between;
@@ -1047,7 +1291,7 @@ body {
     }
 }
 
-/*index page photo slideshow*/
+/*index page - photo slideshow*/
 /*image slideshow home page*/
 .hero-content-wrapper{
     padding-top: 2%;
@@ -1088,6 +1332,8 @@ body {
 .next{
     right: 0;
 }
+
+/*  POPUP BACKDROP */
 #popupContainer {
   position: fixed;
   inset: 0;
@@ -1099,7 +1345,7 @@ body {
   backdrop-filter: blur(5px);
 }
 
-/* pop card */
+/*  POPUP CARD */
 .auth-popup {
   position: relative;
   background: #fff;
@@ -1180,6 +1426,7 @@ body {
   text-decoration: underline;
 }
 
+/* Animation */
 @keyframes fadeInBg {
   from {opacity: 0;}
   to {opacity: 1;}
@@ -1192,12 +1439,12 @@ body {
 
 .our-story {
   position: absolute;
-  top: 50%;              
-  left: 50%;           
+  top: 50%;               /* centers vertically */
+  left: 50%;              /* centers horizontally */
   transform: translate(-50%, -50%);
   text-align: center;
   color: #fff;
-  z-index: 2;        
+  z-index: 2;             /* ensures it's above slideshow */
   padding: 2rem;
   width: 80%;
 }
@@ -1610,7 +1857,7 @@ CHATGPT USED - ADJUST THIS*/
 
 
 
-/* tutorial pop up on the side*/
+/* ---------------- SMALL POPUP ---------------- */
 #tutorial-popup {
   position: fixed;
   bottom: 20px;
@@ -1646,8 +1893,8 @@ CHATGPT USED - ADJUST THIS*/
 #tutorial-thumb {
   position: relative;
   width: 100%;
-  padding-top: 56.25%;   
-  background: #fff; 
+  padding-top: 56.25%;   /* 16:9 aspect ratio */
+  background: #fff;       /* fallback background */
   border-radius: 8px;
   overflow: hidden;
 }
@@ -1659,8 +1906,9 @@ CHATGPT USED - ADJUST THIS*/
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;    
+  object-fit: cover;      /* scale image to fill container without distortion */
 }
+
 /* Play button */
 #play-button {
   position: absolute;
@@ -1668,7 +1916,7 @@ CHATGPT USED - ADJUST THIS*/
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 36px;
-  color: #0f9d58; 
+  color: #0f9d58; /* green button matching popup */
   opacity: 0.9;
   transition: transform 0.3s;
 }
@@ -1677,9 +1925,9 @@ CHATGPT USED - ADJUST THIS*/
   transform: translate(-50%, -50%) scale(1.2);
 }
 
-
+/* ---------------- MODAL ---------------- */
 #tutorial-modal {
-  display: none;          
+  display: none;          /* hidden by default */
   position: fixed;
   top: 0; left: 0;
   width: 100vw;
@@ -1703,7 +1951,7 @@ CHATGPT USED - ADJUST THIS*/
 }
 
 #tutorial-video {
-  width: 100%;       
+  width: 100%;        /* fill modal width */
   max-height: 450px;  /* prevents it from being too tall */
   border-radius: 8px;
   display: block;     /* ensures proper rendering */
@@ -1717,12 +1965,12 @@ CHATGPT USED - ADJUST THIS*/
 }
 
 #visit-resources {
-  color: #0f9d58; 
+  color: #0f9d58; /* green accent to match popup */
   cursor: pointer;
   text-decoration: underline;
 }
 
-
+/* Close button */
 #modal-close {
   position: absolute;
   top: 10px;
@@ -1731,9 +1979,12 @@ CHATGPT USED - ADJUST THIS*/
   color: #fff;
   cursor: pointer;
 }
-/* pop review */
+
+/* ============================= */
+/* REVIEW POPUP STYLES           */
+/* ============================= */
 .popup {
-  display: none; 
+  display: none; /* Hidden by default */
   position: fixed;
   z-index: 999;
   left: 0;
@@ -1824,9 +2075,23 @@ CHATGPT USED - ADJUST THIS*/
   cursor: pointer;
 }
 
+/*PROFILE_REWARDS CSS */
+/* profile and rewards */
+.card-section {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
 
-/* profile and reards */
-
+.membership-card {
+    background: var(--background-color);
+    border-radius: 10px;
+    padding: 0.5rem;
+    position: relative;
+    width: 350px;
+    text-align: center;
+    color: var(--text-color);
+}
 
 .points-badge {
     position: absolute;
@@ -1838,64 +2103,15 @@ CHATGPT USED - ADJUST THIS*/
     font-weight: bold;
 }
 
-
-
-/* Button section below each card */
-.reward-button {
-  margin-top: 0.5rem;
+.wallet-btn {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
 }
 
-
-
-
-
-/* REWARDS */
-.card-section {
-  display: flex;
-  justify-content: center;
-  padding: 1.5rem; /* reduced from 2rem to condense layout */
-}
-
-.membership-card {
-  background: var(--background-color);
-  border-radius: 10px;
-  padding: 1rem; /* reduced padding */
-  position: relative;
-  width: 350px;
-  text-align: center;
-  color: var(--text-color);
-  perspective: 1000px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Expand and glow on click */
-.membership-card:active {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(122, 180, 46, 0.7);
-}
-
-/* Expand and glow only around the card image */
-.membership-card:active .card-face img {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(122, 180, 46, 0.7);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Inner rotating card */
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 220px;
-  transform-style: preserve-3d;
-  transition: transform 0.8s;
-  border-radius: 16px;
-  overflow: visible;
-}
-
-/* Flipping animation */
-.flipped .card-inner {
-  transform: rotateY(180deg);
+.wallet-btn:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .card-face img {
@@ -1904,33 +2120,26 @@ CHATGPT USED - ADJUST THIS*/
   object-fit: cover;
   border-radius: 16px;
   display: block;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Front and back faces of the card */
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  backface-visibility: hidden;
-  border-radius: 10px;
-}
-
-/* Back side flipped */
+/* back side flipped */
 .card-back {
   transform: rotateY(180deg);
 }
 
-/* Buttons below the card */
+/* flipping animation */
+.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Buttons below card */
 .card-buttons {
   display: flex;
   justify-content: center;
-  gap: 1.25rem;
-  margin-top: 0.3rem; /* tighter spacing above */
-  margin-bottom: 0.3rem; /* tighter spacing below */
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-/* Wallet and Flip buttons */
 .wallet-btn,
 .flip-btn {
   padding: 0.5rem 1rem;
@@ -1938,123 +2147,61 @@ CHATGPT USED - ADJUST THIS*/
   border-radius: 8px;
   cursor: pointer;
   background: var(--button-background, #7ab42e);
-  color: #fff;
   transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-/* Hover effects */
 .wallet-btn:hover,
 .flip-btn:hover {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
 }
 
-/* Info Banner */
-.info-banner details {
-  background: #f9fffb;
-  border: 2px solid #8FC73B;
-  border-radius: 12px;
-  padding: 12px 16px;
-  max-width: 90%;
-  margin: 15px auto; /* slightly reduced spacing */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.info-banner summary {
-  font-size: 1.2em;
-  font-weight: normal; /* removed bolding */
-  color: #8FC73B;
-  cursor: pointer;
-  list-style: none;
-  align-items: center;
-  text-align: center;
-}
-
-/* Rewards Section */
 
 .rewards {
-  text-align: center;
-  padding: 1rem; /* reduced from 2rem */
+    text-align: center;
+    padding: 0.2rem;
 }
 
-.rewards h2 {
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  font-size: 2.2em;
-  margin-bottom: 0.4rem; /* ↓ reduced by ~60% */
-}
-
-.rewards .black-text {
-  color: #000;
-}
-
-.rewards .green-text {
-  color: #8FC73B;
-}
-
-/* Rewards Grid */
 .rewards-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem; /* slightly more space between cards */
-  margin-top: 1.5rem; /* reduced */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
 }
 
-/* Responsive stacking on mobile */
-@media (max-width: 480px) {
-  .rewards-grid {
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .reward-card {
-    width: 90%;
-  }
-}
-
-/* Reward Card */
 .reward-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 414px; /* increased by 15% from 360px */
+  width: 600px; 
   max-width: 100%;
-  padding: 1.25rem; /* slightly reduced inner padding */
-  text-align: center;
-  background: var(--background-color);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Hover effect to lift slightly */
-.reward-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(143, 199, 59, 0.25);
-}
-
-/* Reward content container */
+/* Flex layout for image + side label */
 .reward-content {
   display: flex;
   align-items: stretch;
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
   background: white;
 }
 
-/* Reward image */
+/* The main reward image */
 .reward-img {
   width: 85%;
   height: auto;
   display: block;
 }
 
-/* Reward side text (“SET GOAL” / “CURRENT GOAL”) */
+/* The right column text (“SET GOAL” or “CURRENT GOAL”) */
 .reward-side {
   width: 15%;
   background: #fff;
-  color: #D6A300;
+  color: #D6A300; /* gold color */
   font-weight: bold;
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -2071,3 +2218,212 @@ CHATGPT USED - ADJUST THIS*/
   color: white;
 }
 
+/* Button section below each card */
+.reward-button {
+  margin-top: 0.5rem;
+}
+
+.goal-btn {
+  background: #8FC73B;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.goal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Responsive stacking on mobile */
+@media (max-width: 480px) {
+  .rewards-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .reward-card {
+    width: 90%;
+  }
+}
+
+
+
+/* Each reward card box */
+.reward-card {
+  width: 200px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--background-color);
+}
+
+/* Hover effect to lift slightly */
+.reward-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(143, 199, 59, 0.25); 
+}
+
+/* Buttons inside the reward cards */
+.goal-btn {
+  background-color: #8FC73B;  
+  color: white;
+  border: none;              
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Membership Card Interactivity */
+
+/* Card animation container */
+.membership-card {
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Expand and glow on click */
+.membership-card:active {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #7ab42e(255, 215, 0, 0.7);
+}
+
+/* Inner rotating card */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 220px; 
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  border-radius: 16px;
+  overflow: visible; 
+}
+
+/* The actual front and back faces */
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+/* When flipped */
+.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Buttons layout */
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.flip-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.flip-btn:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Expand and glow only around the card image */
+.membership-card:active .card-face img {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #7ab42e(255, 215, 0, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+/* Reset glow when not pressed */
+.card-face img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px;
+}
+
+
+
+.info-banner details {
+  background: #f9fffb;
+  border: 2px solid #8FC73B;
+  border-radius: 12px;
+  padding: 12px 16px;
+  max-width: 90%;
+  margin: 20px auto;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.info-banner summary {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #8FC73B;
+  cursor: pointer;
+  list-style: none;
+  align-items: center;
+  text-align: center;
+}
+
+.rewards h2 {
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  font-size: 2em; /* adjust as needed */
+}
+
+.rewards .black-text {
+  color: #000;
+}
+
+.rewards .green-text {
+  color: #8FC73B;
+}
+
+.reward-buttons {
+  display: flex;
+  justify-content: center;   /* centers horizontally */
+  gap: 1rem;                 /* space between buttons */
+  margin-top: 1.5rem;
+  padding-bottom: 2rem;      /* 👈 adds space underneath */
+}
+
+.reward-buttons a {
+  background-color: #8FC73B; /* green background */
+  color: white;              /* white text */
+  text-decoration: none;     /* remove underline */
+  padding: 12px 24px;        /* button-like padding */
+  border-radius: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.reward-buttons a:hover {
+  background-color: #7BB832; /* slightly darker green */
+  transform: translateY(-2px);
+}
+
+/* outlined button variant */
+.btn-outline {
+  background-color: transparent;
+  color: #8FC73B;
+  border: 2px solid #8FC73B;
+}
+
+.btn-outline:hover {
+  background-color: #8FC73B;
+  color: white;
+}
